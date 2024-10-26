@@ -98,6 +98,28 @@ export interface IContact {
   userId: number;
   queueId: number;
   tags: ITag[];
+  extraInfo: IContactExtraInfo[];
+}
+
+export interface IContactExtraInfo {
+  name: string;
+  value: string;
+}
+
+export interface IContactPostData {
+  name: string;
+  number: string;
+  email: string;
+  profilePicUrl: string;
+  isGroup: boolean;
+  blocked: boolean;
+  userId: number;
+  queueId: number;
+  createdAt: string;
+  updatedAt: string;
+  tagsIds: number[];
+  extraInfo: IContactExtraInfo[];
+  noCheckNumber: boolean;
 }
 
 export interface ITag {

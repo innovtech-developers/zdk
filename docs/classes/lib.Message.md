@@ -34,7 +34,7 @@
 
 #### Defined in
 
-lib/message.ts:13
+[lib/message.ts:13](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L13)
 
 ## Methods
 
@@ -54,7 +54,7 @@ lib/message.ts:13
 
 #### Defined in
 
-lib/message.ts:41
+[lib/message.ts:41](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L41)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-lib/message.ts:15
+[lib/message.ts:15](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L15)
 
 ___
 
@@ -96,4 +96,4 @@ ___
 
 #### Defined in
 
-lib/message.ts:55
+[lib/message.ts:55](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L55)

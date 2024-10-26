@@ -28,7 +28,7 @@
 
 #### Defined in
 
-types.ts:162
+[types.ts:184](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L184)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-types.ts:24
+[types.ts:24](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L24)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-types.ts:25
+[types.ts:25](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L25)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-types.ts:27
+[types.ts:27](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L27)
 
 ___
 
@@ -84,4 +84,4 @@ ___
 
 #### Defined in
 
-types.ts:26
+[types.ts:26](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L26)

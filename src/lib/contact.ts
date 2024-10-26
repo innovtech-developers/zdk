@@ -1,4 +1,10 @@
-import type { IContact, IContactList, IError, IParamsList } from "../types";
+import type {
+  IContact,
+  IContactList,
+  IContactPostData,
+  IError,
+  IParamsList,
+} from "../types";
 import type { ZappyApi } from "../zappy-api";
 
 export class Contact {
@@ -33,7 +39,25 @@ export class Contact {
     } catch (error) {
       console.error(error);
 
-      return { error: "Unable to contact" };
+      return { error: "No contact details could be obtained" };
+    }
+  }
+
+  async update(id: number, data: IContactPostData): Promise<IContact | IError> {
+    try {
+      const response = await this.api.makeRequest(
+        "PUT",
+        `/api/contacts/${id}`,
+        data
+      );
+
+      if (response?.error) return { error: response?.error };
+
+      return response as IContact;
+    } catch (error) {
+      console.error(error);
+
+      return { error: "Unable to update contact" };
     }
   }
 }

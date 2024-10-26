@@ -14,7 +14,9 @@
 - [IConnection](../interfaces/index.IConnection.md)
 - [IConnectionList](../interfaces/index.IConnectionList.md)
 - [IContact](../interfaces/index.IContact.md)
+- [IContactExtraInfo](../interfaces/index.IContactExtraInfo.md)
 - [IContactList](../interfaces/index.IContactList.md)
+- [IContactPostData](../interfaces/index.IContactPostData.md)
 - [IError](../interfaces/index.IError.md)
 - [IMessage](../interfaces/index.IMessage.md)
 - [IMessageList](../interfaces/index.IMessageList.md)
@@ -55,7 +57,7 @@
 
 #### Defined in
 
-types.ts:7
+[types.ts:7](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L7)
 
 ___
 
@@ -65,7 +67,7 @@ ___
 
 #### Defined in
 
-types.ts:13
+[types.ts:13](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L13)
 
 ___
 
@@ -75,7 +77,7 @@ ___
 
 #### Defined in
 
-types.ts:5
+[types.ts:5](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L5)
 
 ___
 
@@ -85,7 +87,7 @@ ___
 
 #### Defined in
 
-types.ts:15
+[types.ts:15](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L15)
 
 ___
 
@@ -95,7 +97,7 @@ ___
 
 #### Defined in
 
-types.ts:11
+[types.ts:11](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L11)
 
 ___
 
@@ -105,4 +107,4 @@ ___
 
 #### Defined in
 
-types.ts:9
+[types.ts:9](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L9)

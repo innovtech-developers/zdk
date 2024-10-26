@@ -14,6 +14,7 @@
 
 - [get](lib.Contact.md#get)
 - [list](lib.Contact.md#list)
+- [update](lib.Contact.md#update)
 
 ## Constructors
 
@@ -33,7 +34,7 @@
 
 #### Defined in
 
-lib/contact.ts:5
+[lib/contact.ts:11](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L11)
 
 ## Methods
 
@@ -53,7 +54,7 @@ lib/contact.ts:5
 
 #### Defined in
 
-lib/contact.ts:26
+[lib/contact.ts:32](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L32)
 
 ___
 
@@ -73,4 +74,25 @@ ___
 
 #### Defined in
 
-lib/contact.ts:7
+[lib/contact.ts:13](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L13)
+
+___
+
+### update
+
+▸ **update**(`id`, `data`): `Promise`\<[`IError`](../interfaces/index.IError.md) \| [`IContact`](../interfaces/index.IContact.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `number` |
+| `data` | [`IContactPostData`](../interfaces/index.IContactPostData.md) |
+
+#### Returns
+
+`Promise`\<[`IError`](../interfaces/index.IError.md) \| [`IContact`](../interfaces/index.IContact.md)\>
+
+#### Defined in
+
+[lib/contact.ts:46](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L46)

@@ -33,7 +33,7 @@
 
 #### Defined in
 
-lib/connection.ts:5
+[lib/connection.ts:5](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/connection.ts#L5)
 
 ## Methods
 
@@ -53,7 +53,7 @@ lib/connection.ts:5
 
 #### Defined in
 
-lib/connection.ts:19
+[lib/connection.ts:19](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/connection.ts#L19)
 
 ___
 
@@ -67,4 +67,4 @@ ___
 
 #### Defined in
 
-lib/connection.ts:7
+[lib/connection.ts:7](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/connection.ts#L7)

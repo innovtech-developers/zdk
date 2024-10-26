@@ -18,4 +18,4 @@
 
 #### Defined in
 
-types.ts:2
+[types.ts:2](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L2)

@@ -28,7 +28,7 @@
 
 #### Defined in
 
-types.ts:113
+[types.ts:135](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L135)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-types.ts:119
+[types.ts:141](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L141)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-types.ts:110
+[types.ts:132](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L132)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-types.ts:118
+[types.ts:140](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L140)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-types.ts:117
+[types.ts:139](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L139)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-types.ts:115
+[types.ts:137](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L137)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-types.ts:111
+[types.ts:133](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L133)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-types.ts:116
+[types.ts:138](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L138)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-types.ts:120
+[types.ts:142](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L142)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-types.ts:112
+[types.ts:134](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L134)
 
 ___
 
@@ -128,4 +128,4 @@ ___
 
 #### Defined in
 
-types.ts:114
+[types.ts:136](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L136)

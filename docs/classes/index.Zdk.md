@@ -53,7 +53,7 @@
 
 #### Defined in
 
-zappy-api.ts:7
+[zappy-api.ts:7](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zappy-api.ts#L7)
 
 ## Properties
 
@@ -63,7 +63,7 @@ zappy-api.ts:7
 
 #### Defined in
 
-zdk.ts:15
+[zdk.ts:15](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zdk.ts#L15)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-zdk.ts:17
+[zdk.ts:17](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zdk.ts#L17)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-zdk.ts:19
+[zdk.ts:19](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zdk.ts#L19)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-zdk.ts:21
+[zdk.ts:21](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zdk.ts#L21)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-zdk.ts:23
+[zdk.ts:23](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zdk.ts#L23)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-zdk.ts:13
+[zdk.ts:13](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zdk.ts#L13)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-zdk.ts:25
+[zdk.ts:25](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zdk.ts#L25)
 
 ## Methods
 
@@ -150,4 +150,4 @@ zdk.ts:25
 
 #### Defined in
 
-zappy-api.ts:12
+[zappy-api.ts:12](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zappy-api.ts#L12)
