@@ -62,14 +62,14 @@ export interface ISendMessage {
 }
 
 export interface ISendMediaMessage {
-  media: string;
-  caption: string;
+  media: unknown;
+  caption?: string;
   connectionFrom: number;
 }
 
 export interface SendMediaMessageJson {
   url: string;
-  caption: string;
+  caption?: string;
   connectionFrom: string;
 }
 

@@ -3,11 +3,13 @@ import type {
   IMessage,
   IMessageList,
   IParamsMessageList,
+  ISendMediaMessage,
   ISendMessage,
   MediaType,
 } from "../types";
 
 import type { ZappyApi } from "../zappy-api";
+import FormData from "form-data";
 
 export class Message {
   constructor(protected api: ZappyApi) {}
@@ -52,7 +54,22 @@ export class Message {
     }
   }
 
-  async send(to: string, data: ISendMessage, type?: MediaType) {
+  async send(to: string, data: ISendMessage): Promise<Message | IError>;
+
+  async send(
+    to: string,
+    data: ISendMediaMessage,
+    type: Exclude<MediaType, "text">
+  ): Promise<Message | IError>;
+
+  async send(
+    to: string,
+    data: ISendMessage | ISendMediaMessage,
+    /**
+     * @default "text"
+     */
+    type?: MediaType
+  ): Promise<Message | IError> {
     try {
       if (!type || type === "text") {
         const response = await this.api.makeRequest(
@@ -60,6 +77,27 @@ export class Message {
           `/api/send/${to}`,
           data
         );
+
+        if (response?.error) return { error: response?.error };
+
+        return response;
+      } else {
+        const { caption, connectionFrom, media } = data as ISendMediaMessage;
+        const form = new FormData();
+        form.append("media", media);
+        form.append("caption", caption || "");
+        form.append("connectionFrom", connectionFrom);
+
+        const response = await this.api.makeRequest(
+          "POST",
+          `/api/send/${type}/${to}`,
+          form,
+          {
+            ...form.getHeaders(),
+          }
+        );
+
+        if (response?.error) return { error: response?.error };
 
         return response;
       }

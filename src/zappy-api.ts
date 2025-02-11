@@ -1,4 +1,5 @@
 import type { HttpMethod } from "./types";
+import axios, { AxiosError } from "axios";
 
 export class ZappyApi {
   private _rootUrl: string;
@@ -12,33 +13,35 @@ export class ZappyApi {
   async makeRequest(
     method: HttpMethod,
     endpoint: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    body?: any,
-    contentType?: string
+    data?: unknown,
+    customHeaders?: Record<string, string>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     if (!this._rootUrl || !this._token) {
       throw new Error("Missing base url or API token");
     }
 
-    const fullUrl: string = this._rootUrl + endpoint;
-    const options: RequestInit = {
-      method,
-      headers: {
-        Authorization: `Bearer ${this._token}`,
-        "Content-Type": contentType ?? "application/json",
-      },
-      body: body
-        ? typeof body === "string"
-          ? body
-          : JSON.stringify(body)
-        : undefined,
-    };
+    try {
+      const url: string = this._rootUrl + endpoint;
+      const options = {
+        url,
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this._token}`,
+          ...customHeaders,
+        },
+        data,
+      };
+      const request = await axios(options);
+      const response = await request.data;
+      return response;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && "error" in error.response.data) {
+        throw new Error(error?.response?.data?.error);
+      }
 
-    const request = await fetch(fullUrl, options);
-
-    const response = await request.json();
-
-    return response;
+      throw new Error("No request possible");
+    }
   }
 }

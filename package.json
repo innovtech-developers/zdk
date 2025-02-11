@@ -1,6 +1,6 @@
 {
   "name": "zdk",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Kit de desenvolvimento Zappy",
   "main": "./dist/index.js",
   "module": "./dist/esm/index.js",
@@ -50,6 +50,7 @@
     "typescript": "^5.2.*"
   },
   "dependencies": {
-    "axios": "^1.6.2"
+    "axios": "^1.7.9",
+    "form-data": "^4.0.1"
   }
 }
