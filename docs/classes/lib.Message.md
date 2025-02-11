@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[lib/message.ts:13](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L13)
+[lib/message.ts:15](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L15)
 
 ## Methods
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[lib/message.ts:41](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L41)
+[lib/message.ts:43](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L43)
 
 ___
 
@@ -74,13 +74,13 @@ ___
 
 #### Defined in
 
-[lib/message.ts:15](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L15)
+[lib/message.ts:17](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L17)
 
 ___
 
 ### send
 
-▸ **send**(`to`, `data`, `type?`): `Promise`\<`any`\>
+▸ **send**(`to`, `data`): `Promise`\<[`IError`](../interfaces/index.IError.md) \| [`Message`](lib.Message.md)\>
 
 #### Parameters
 
@@ -88,12 +88,29 @@ ___
 | :------ | :------ |
 | `to` | `string` |
 | `data` | [`ISendMessage`](../interfaces/index.ISendMessage.md) |
-| `type?` | [`MediaType`](../modules/index.md#mediatype) |
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<[`IError`](../interfaces/index.IError.md) \| [`Message`](lib.Message.md)\>
 
 #### Defined in
 
-[lib/message.ts:55](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/message.ts#L55)
+[lib/message.ts:57](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L57)
+
+▸ **send**(`to`, `data`, `type`): `Promise`\<[`IError`](../interfaces/index.IError.md) \| [`Message`](lib.Message.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `to` | `string` |
+| `data` | [`ISendMediaMessage`](../interfaces/index.ISendMediaMessage.md) |
+| `type` | ``"image"`` \| ``"video"`` \| ``"audio"`` \| ``"voice"`` \| ``"document"`` |
+
+#### Returns
+
+`Promise`\<[`IError`](../interfaces/index.IError.md) \| [`Message`](lib.Message.md)\>
+
+#### Defined in
+
+[lib/message.ts:59](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L59)

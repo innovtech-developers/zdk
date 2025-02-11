@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[lib/contact.ts:11](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L11)
+[lib/contact.ts:11](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/contact.ts#L11)
 
 ## Methods
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[lib/contact.ts:32](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L32)
+[lib/contact.ts:32](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/contact.ts#L32)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[lib/contact.ts:13](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L13)
+[lib/contact.ts:13](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/contact.ts#L13)
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 #### Defined in
 
-[lib/contact.ts:46](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/contact.ts#L46)
+[lib/contact.ts:46](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/contact.ts#L46)

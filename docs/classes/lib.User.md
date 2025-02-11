@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[lib/user.ts:5](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/user.ts#L5)
+[lib/user.ts:5](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/user.ts#L5)
 
 ## Methods
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[lib/user.ts:26](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/user.ts#L26)
+[lib/user.ts:26](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/user.ts#L26)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 #### Defined in
 
-[lib/user.ts:7](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/lib/user.ts#L7)
+[lib/user.ts:7](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/user.ts#L7)

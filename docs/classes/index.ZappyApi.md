@@ -39,13 +39,13 @@
 
 #### Defined in
 
-[zappy-api.ts:7](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zappy-api.ts#L7)
+[zappy-api.ts:8](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/zappy-api.ts#L8)
 
 ## Methods
 
 ### makeRequest
 
-▸ **makeRequest**(`method`, `endpoint`, `body?`, `contentType?`): `Promise`\<`any`\>
+▸ **makeRequest**(`method`, `endpoint`, `data?`, `customHeaders?`): `Promise`\<`any`\>
 
 #### Parameters
 
@@ -53,8 +53,8 @@
 | :------ | :------ |
 | `method` | [`HttpMethod`](../modules/index.md#httpmethod) |
 | `endpoint` | `string` |
-| `body?` | `any` |
-| `contentType?` | `string` |
+| `data?` | `unknown` |
+| `customHeaders?` | `Record`\<`string`, `string`\> |
 
 #### Returns
 
@@ -62,4 +62,4 @@
 
 #### Defined in
 
-[zappy-api.ts:12](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/zappy-api.ts#L12)
+[zappy-api.ts:13](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/zappy-api.ts#L13)

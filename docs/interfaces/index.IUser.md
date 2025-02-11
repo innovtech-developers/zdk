@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[types.ts:152](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L152)
+[types.ts:152](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L152)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[types.ts:148](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L148)
+[types.ts:148](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L148)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[types.ts:151](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L151)
+[types.ts:151](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L151)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[types.ts:146](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L146)
+[types.ts:146](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L146)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[types.ts:147](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L147)
+[types.ts:147](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L147)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[types.ts:150](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L150)
+[types.ts:150](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L150)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[types.ts:149](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L149)
+[types.ts:149](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L149)
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 #### Defined in
 
-[types.ts:153](https://github.com/innovtech-developers/zdk/blob/7db792f8d0888698b5c087a743b692e20fed3a78/src/types.ts#L153)
+[types.ts:153](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/types.ts#L153)
