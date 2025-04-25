@@ -35,6 +35,8 @@ export class Connection {
 
         return validConnection;
       }
+
+      return connectionExists;
     } catch (error) {
       console.error(error);
 

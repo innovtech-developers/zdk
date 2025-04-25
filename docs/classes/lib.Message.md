@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[lib/message.ts:15](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L15)
+[lib/message.ts:15](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/message.ts#L15)
 
 ## Methods
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[lib/message.ts:43](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L43)
+[lib/message.ts:43](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/message.ts#L43)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[lib/message.ts:17](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L17)
+[lib/message.ts:17](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/message.ts#L17)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[lib/message.ts:57](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L57)
+[lib/message.ts:57](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/message.ts#L57)
 
 ▸ **send**(`to`, `data`, `type`): `Promise`\<[`IError`](../interfaces/index.IError.md) \| [`Message`](lib.Message.md)\>
 
@@ -113,4 +113,4 @@ ___
 
 #### Defined in
 
-[lib/message.ts:59](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/message.ts#L59)
+[lib/message.ts:59](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/message.ts#L59)

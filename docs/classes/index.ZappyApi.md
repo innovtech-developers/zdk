@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[zappy-api.ts:8](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/zappy-api.ts#L8)
+[zappy-api.ts:8](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/zappy-api.ts#L8)
 
 ## Methods
 
@@ -62,4 +62,4 @@
 
 #### Defined in
 
-[zappy-api.ts:13](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/zappy-api.ts#L13)
+[zappy-api.ts:13](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/zappy-api.ts#L13)

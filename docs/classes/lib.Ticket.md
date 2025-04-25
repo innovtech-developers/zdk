@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[lib/ticket.ts:13](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/ticket.ts#L13)
+[lib/ticket.ts:13](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/ticket.ts#L13)
 
 ## Methods
 
@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[lib/ticket.ts:34](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/ticket.ts#L34)
+[lib/ticket.ts:34](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/ticket.ts#L34)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[lib/ticket.ts:15](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/ticket.ts#L15)
+[lib/ticket.ts:15](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/ticket.ts#L15)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[lib/ticket.ts:69](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/ticket.ts#L69)
+[lib/ticket.ts:69](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/ticket.ts#L69)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[lib/ticket.ts:48](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/ticket.ts#L48)
+[lib/ticket.ts:48](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/ticket.ts#L48)
 
 ___
 
@@ -139,4 +139,4 @@ ___
 
 #### Defined in
 
-[lib/ticket.ts:90](https://github.com/innovtech-developers/zdk/blob/6a76e78c508b6f3ff70b928b5924e5ccba332fad/src/lib/ticket.ts#L90)
+[lib/ticket.ts:90](https://github.com/innovtech-developers/zdk/blob/e93f80c6da43b38f329b603694abcf30af4f5a5d/src/lib/ticket.ts#L90)
