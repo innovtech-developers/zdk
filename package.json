@@ -1,6 +1,6 @@
 {
   "name": "zdk",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Kit de desenvolvimento Zappy",
   "main": "./dist/index.js",
   "module": "./dist/esm/index.js",
