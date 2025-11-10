@@ -6,7 +6,7 @@ export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 export type ConnectionStatus = "CONNECTED" | "DISCONNECTED" | "TIMEOUT";
 
-export type TicketStrategy = "create" | "nocreate" | "close";
+export type TicketStrategy = "create" | "nocreate" | "close" | "reuseOrClose";
 
 export type TicketStatus = "pending" | "open" | "closed";
 
