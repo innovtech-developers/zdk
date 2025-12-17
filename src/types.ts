@@ -4,7 +4,7 @@ export interface IError {
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-export type ConnectionStatus = "CONNECTED" | "DISCONNECTED" | "TIMEOUT";
+export type ConnectionStatus = "CONNECTED" | "DISCONNECTED" | "TIMEOUT" | "WHATSAPP_AUTH";
 
 export type TicketStrategy = "create" | "nocreate" | "close" | "reuseOrClose";
 
