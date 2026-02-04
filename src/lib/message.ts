@@ -54,13 +54,13 @@ export class Message {
     }
   }
 
-  async send(to: string, data: ISendMessage): Promise<Message | IError>;
+  async send(to: string, data: ISendMessage): Promise<IMessage | IError>;
 
   async send(
     to: string,
     data: ISendMediaMessage,
     type: Exclude<MediaType, "text">
-  ): Promise<Message | IError>;
+  ): Promise<IMessage | IError>;
 
   async send(
     to: string,
@@ -69,7 +69,7 @@ export class Message {
      * @default "text"
      */
     type?: MediaType
-  ): Promise<Message | IError> {
+  ): Promise<IMessage | IError> {
     try {
       if (!type || type === "text") {
         const response = await this.api.makeRequest(
