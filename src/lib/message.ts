@@ -80,7 +80,7 @@ export class Message {
 
         if (response?.error) return { error: response?.error };
 
-        return response;
+        return response as IMessage;
       } else {
         const { caption, connectionFrom, media } = data as ISendMediaMessage;
         const form = new FormData();
@@ -99,7 +99,7 @@ export class Message {
 
         if (response?.error) return { error: response?.error };
 
-        return response;
+        return response as IMessage;
       }
     } catch (error) {
       console.error(error);
