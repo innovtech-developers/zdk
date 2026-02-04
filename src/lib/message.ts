@@ -54,13 +54,13 @@ export class Message {
     }
   }
 
-  async send(to: string, data: ISendMessage): Promise<IMessage | IError>;
+  async send(to: string, data: ISendMessage): Promise<{ message: IMessage } | IError>;
 
   async send(
     to: string,
     data: ISendMediaMessage,
     type: Exclude<MediaType, "text">
-  ): Promise<IMessage | IError>;
+  ): Promise<{ message: IMessage } | IError>;
 
   async send(
     to: string,
@@ -69,7 +69,7 @@ export class Message {
      * @default "text"
      */
     type?: MediaType
-  ): Promise<IMessage | IError> {
+  ): Promise<{ message: IMessage } | IError> {
     try {
       if (!type || type === "text") {
         const response = await this.api.makeRequest(
@@ -80,7 +80,7 @@ export class Message {
 
         if (response?.error) return { error: response?.error };
 
-        return response as IMessage;
+        return response;
       } else {
         const { caption, connectionFrom, media } = data as ISendMediaMessage;
         const form = new FormData();
@@ -98,8 +98,8 @@ export class Message {
         );
 
         if (response?.error) return { error: response?.error };
-
-        return response as IMessage;
+        
+        return response;
       }
     } catch (error) {
       console.error(error);
