@@ -20,28 +20,35 @@ export class Connection {
     try {
       const response = await this.api.makeRequest("GET", "/api/connections");
 
-      const connections = response?.connections as IConnection[];
+      const connections = Array.isArray(response?.connections)
+        ? (response.connections as IConnection[])
+        : [];
 
-      const connectionExists = connections.find(
-        (connection: IConnection) => connection.id === id
-      );
+      const isValidConnection = (conn: IConnection) => {
+        const status = (conn?.status || "").toString().trim().toUpperCase();
+        return status === "CONNECTED" || status === "WHATSAPP_AUTH";
+      };
 
-      const isValidConnection = (conn: IConnection) => conn.status === "CONNECTED" || conn.status === "WHATSAPP_AUTH";
-      if (!connectionExists || !isValidConnection(connectionExists)) {
-        const validConnection = connections?.find(
-          (connection: IConnection) => isValidConnection(connection)
-        );
+      const idNum = id == null ? undefined : Number(id);
 
-        if (!validConnection) return { error: "Connection not found" };
+      const connectionExists = typeof idNum === "number" && !Number.isNaN(idNum)
+        ? connections.find((connection: IConnection) => connection.id === idNum)
+        : undefined;
 
-        return validConnection;
+      if (connectionExists && isValidConnection(connectionExists)) {
+        return connectionExists;
       }
 
-      return connectionExists;
+      const validConnection = connections.find((connection: IConnection) => isValidConnection(connection))
+        || connections.find((connection: IConnection) => connection.isDefault === true);
+
+      if (!validConnection) return { error: "Connection not found" };
+
+      return validConnection;
     } catch (error) {
       console.error(error);
 
-      return { error: "Unable to connection" };
+      return { error: "Unable to get connection" };
     }
   }
 }
