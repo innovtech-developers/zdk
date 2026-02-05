@@ -20,31 +20,27 @@ export class Connection {
     try {
       const response = await this.api.makeRequest("GET", "/api/connections");
 
-      const connections = Array.isArray(response?.connections)
-        ? (response.connections as IConnection[])
-        : [];
-
-      const isValidConnection = (conn: IConnection) => {
-        const status = (conn?.status || "").toString().trim().toUpperCase();
-        return status === "CONNECTED" || status === "WHATSAPP_AUTH";
-      };
-
-      const idNum = id == null ? undefined : Number(id);
-
-      const connectionExists = typeof idNum === "number" && !Number.isNaN(idNum)
-        ? connections.find((connection: IConnection) => connection.id === idNum)
-        : undefined;
-
-      if (connectionExists && isValidConnection(connectionExists)) {
-        return connectionExists;
+      const connections = response?.connections as IConnection[];
+      if (!connections || connections.length === 0) {
+        return { error: "No connections available" };
       }
 
-      const validConnection = connections.find((connection: IConnection) => isValidConnection(connection))
-        || connections.find((connection: IConnection) => connection.isDefault === true);
+      const connectionExists = connections.find(
+        (connection: IConnection) => connection.id === id
+      );
 
-      if (!validConnection) return { error: "Connection not found" };
+      const isValidConnection = (conn: IConnection) => conn.status === "CONNECTED" || conn.status === "WHATSAPP_AUTH";
+      if (!connectionExists || !isValidConnection(connectionExists)) {
+        const validConnection = connections?.find(
+          (connection: IConnection) => isValidConnection(connection)
+        );
 
-      return validConnection;
+        if (!validConnection) return { error: "Connection not found" };
+
+        return validConnection;
+      }
+
+      return connectionExists;
     } catch (error) {
       console.error(error);
 
