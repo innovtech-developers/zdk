@@ -2,7 +2,7 @@ import { ZappyApi } from "../zappy-api";
 import type { IConnection, IConnectionList, IError } from "../types";
 
 export class Connection {
-  constructor(protected api: ZappyApi) {}
+  constructor(protected api: ZappyApi) { }
 
   async list(): Promise<IConnectionList | IError> {
     try {
