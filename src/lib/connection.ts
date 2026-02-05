@@ -26,9 +26,10 @@ export class Connection {
         (connection: IConnection) => connection.id === id
       );
 
-      if (!connectionExists || connectionExists?.status !== "CONNECTED") {
+      const isValidConnection = (conn: IConnection) => conn.status === "CONNECTED" || conn.status === "WHATSAPP_AUTH";
+      if (!connectionExists || !isValidConnection(connectionExists)) {
         const validConnection = connections?.find(
-          (connection: IConnection) => connection?.status === "CONNECTED"
+          (connection: IConnection) => isValidConnection(connection)
         );
 
         if (!validConnection) return { error: "Connection not found" };
