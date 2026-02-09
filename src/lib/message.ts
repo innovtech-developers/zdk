@@ -11,8 +11,47 @@ import type {
 import type { ZappyApi } from "../zappy-api";
 import FormData from "form-data";
 
+function safeStringify(obj: any) {
+  try {
+    return JSON.stringify(obj, null, 2);
+  } catch {
+    try {
+      return String(obj);
+    } catch {
+      return "[unserializable]";
+    }
+  }
+}
+
+function sanitizeData(value: any): any {
+  if (value == null) return value;
+  if (typeof value !== "object") return value;
+
+  if (Array.isArray(value)) return value.map(sanitizeData);
+
+  const redacted = ["media", "file", "buffer"];
+  const out: Record<string, any> = {};
+
+  for (const key of Object.keys(value)) {
+    try {
+      if (redacted.includes(key)) {
+        out[key] = "<redacted>";
+      } else if (/(token|password|auth|authorization)/i.test(key)) {
+        out[key] = "<redacted>";
+      } else {
+        const v = value[key];
+        out[key] = typeof v === "object" ? sanitizeData(v) : v;
+      }
+    } catch {
+      out[key] = "<unserializable>";
+    }
+  }
+
+  return out;
+}
+
 export class Message {
-  constructor(protected api: ZappyApi) {}
+  constructor(protected api: ZappyApi) { }
 
   async list(params?: IParamsMessageList): Promise<IMessageList | IError> {
     try {
@@ -98,11 +137,24 @@ export class Message {
         );
 
         if (response?.error) return { error: response?.error };
-        
+
         return response;
       }
     } catch (error) {
-      console.error(error);
+      const log = {
+        timestamp: new Date().toISOString(),
+        component: "Message",
+        method: "send",
+        to,
+        type: type || "text",
+        data: sanitizeData(data),
+        error: {
+          message: (error as any)?.message || String(error),
+          stack: (error as any)?.stack,
+        },
+      };
+
+      console.error("ZDK_ERROR", safeStringify(log));
 
       return { error: "Cannot send message" };
     }
