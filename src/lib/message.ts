@@ -149,9 +149,10 @@ export class Message {
         type: type || "text",
         data: sanitizeData(data),
         error: {
-          message: error?.message ? JSON.stringify(error, null, 4) : JSON.stringify(error),
+          message: (error as any)?.message || "Unknown error",
+          code: (error as any)?.code,
           stack: (error as any)?.stack,
-          full: JSON.stringify(error, null, 4),
+          full: safeStringify(error),
         },
       };
 

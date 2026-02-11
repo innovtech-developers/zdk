@@ -37,8 +37,22 @@ export class ZappyApi {
       const response = await request.data;
       return response;
     } catch (error: unknown) {
-      if (error instanceof AxiosError && "error" in error.response.data) {
-        throw new Error(error?.response?.data?.error);
+      if (error instanceof AxiosError && error.response?.data) {
+        const errorData = error.response.data;
+        const errorMessage = errorData?.error || errorData?.message;
+
+        // Handle if error is an object, convert to string
+        const messageStr = typeof errorMessage === 'string'
+          ? errorMessage
+          : typeof errorMessage === 'object' && errorMessage !== null
+            ? JSON.stringify(errorMessage)
+            : 'Unknown error';
+
+        throw new Error(messageStr);
+      }
+
+      if (error instanceof AxiosError) {
+        throw new Error(error.message || "No request possible");
       }
 
       throw new Error("No request possible");
