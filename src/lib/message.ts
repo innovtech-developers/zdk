@@ -149,7 +149,7 @@ export class Message {
         type: type || "text",
         data: sanitizeData(data),
         error: {
-          message: (error as any)?.message || String(error),
+          message: error?.message ? JSON.stringify(error, null, 4) : JSON.stringify(error),
           stack: (error as any)?.stack,
         },
       };
