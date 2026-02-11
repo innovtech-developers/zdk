@@ -151,6 +151,7 @@ export class Message {
         error: {
           message: error?.message ? JSON.stringify(error, null, 4) : JSON.stringify(error),
           stack: (error as any)?.stack,
+          full: JSON.stringify(error, null, 4),
         },
       };
 
