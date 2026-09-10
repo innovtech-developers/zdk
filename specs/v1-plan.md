@@ -37,7 +37,7 @@ Regra que o grafo impõe: **nada que fale HTTP é escrito antes de F3 estar verd
 
 Node 20 em `.tool-versions` + `engines.node`, `tsconfig` com `strict: true`, vitest + coverage v8 com `tests/` na raiz, ESLint ganhando `no-console` e `no-explicit-any` como error, devDeps `openapi-typescript` + `tsx` + `vitest`.
 
-**Não remove `axios`/`form-data` aqui** — só em F5, quando houver substituto. Remover antes deixa o repo sem build por várias tarefas.
+**Não remove `axios`/`form-data` aqui** — só em F7 (ver nota nessa seção), quando o código legado que os usa finalmente é apagado. Remover antes deixa o repo sem build por várias tarefas.
 
 Checkpoint: `npm run verify` passa num projeto ainda com o código v0.7 intacto.
 
@@ -86,9 +86,9 @@ Checkpoint: `tests/contract/quirks.test.ts` confirma que cada quirk ainda se apl
 
 `core/http-client.ts` (interface + `FetchHttpClient`), `core/api-client.ts` (`request<K>()` com timeout, retry pela matriz, semáforo, upgrade de 404), `core/capabilities.ts`, `core/operation-metadata.ts` (retryClass + timeout das 48).
 
-**É aqui que `axios` e `form-data` saem do `package.json`.**
+Checkpoint: matriz de §5.8.3 coberta por `test.each` com fake timers; `npm run verify` verde.
 
-Checkpoint: matriz de §5.8.3 coberta por `test.each` com fake timers; `dependencies` vazio; `npm run verify` verde.
+**Ajuste descoberto na execução:** o plano original previa `axios`/`form-data` saindo do `package.json` aqui. Não dá — `src/lib/*` e `src/zappy-api.ts` (v0.7) ainda importam os dois, e só são apagados em F7 (T27); removê-los em F5 quebraria o build pelas duas fases seguintes sem nenhum substituto no ar ainda. O "zero dependências de runtime" só se prova em F7/T27, não aqui.
 
 ### F6 — Recursos (12 classes, altamente paralelo)
 
@@ -158,10 +158,10 @@ Ao fim de cada fase, `npm run verify` verde e mais o específico:
 | F1 | relatório reproduz 48/43 e as divergências conhecidas |
 | F2 | `test:types` rejeita `"PUT /api/connections"` |
 | F3 | coverage ≥90% em `core/`, zero rede; query monta `dateTo=` |
-| F4 | 22 quirks conferem contra os dois snapshots |
-| F5 | matriz de retry completa; `dependencies` vazio |
+| F4 | 21 quirks conferem contra os dois snapshots |
+| F5 | matriz de retry completa |
 | F6 | por tarefa: método/URL/headers/body enviados ao fake conferem |
-| F7 | `new Zdk()` = 0 requisições; `connect()` = 1 |
+| F7 | `new Zdk()` = 0 requisições; `connect()` = 1; `dependencies` do `package.json` vazio (adiado de F5 — ver nota na própria seção) |
 | F8 | 48/48 mapeadas, nenhum método órfão |
 | F9 | typedoc gera sem warning; nenhum link quebrado |
 | F10 | import CJS e ESM do tarball com tipos resolvidos |

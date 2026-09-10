@@ -21,7 +21,15 @@ export interface OperationMetadata {
   readonly timeoutMs: number;
 }
 
-const DEFAULT_TIMEOUT_MS = 10_000;
+/**
+ * Sentinela, não só constante: `api-client.ts` (T18) usa este valor exato
+ * para distinguir "operação sem motivo técnico especial" (onde a config
+ * global de timeout do consumidor pode substituir) de um override genuíno
+ * como os 60s/120s abaixo (que vale sempre, por cima de qualquer config
+ * global — §5.8.1: "default da operação" > "config global" só quando o
+ * default da operação NÃO é este sentinela).
+ */
+export const DEFAULT_TIMEOUT_MS = 10_000;
 /** Corpo binário/mídia (§5.8.1). */
 const MEDIA_TIMEOUT_MS = 60_000;
 /** `SendTemplateBulk.to` sem `maxItems` (Q10) — processamento por número, duração não previsível. */

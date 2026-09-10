@@ -10,105 +10,106 @@
 
 ## F0 — Tooling
 
-- [ ] **T01 — Node 20, tsconfig strict, saída do typedoc**
+- [x] **T01 — Node 20, tsconfig strict, saída do typedoc**
   - Acceptance: `engines.node` = `>=20`, `.tool-versions` = 20.x, `tsconfig` com `strict: true` e `target: es2022`; `typedoc.json` emite em `docs/api/` e o `entryPoints` não aponta mais para `./src/types/index.ts` (que não existe)
   - Verify: `node -v`, `npx tsc --noEmit`, `npm run docs:generate` sem warning
   - Files: `.tool-versions`, `package.json`, `tsconfig.json`, `typedoc.json`
 
-- [ ] **T02 — Vitest com `tests/` na raiz**
+- [x] **T02 — Vitest com `tests/` na raiz**
   - Acceptance: `vitest.config.ts` com coverage v8, thresholds 90% em `src/core` e `src/resources`, `src/generated` excluído; scripts `test`, `test:watch`, `test:coverage`, `test:types`, `verify`; `HttpClient` fake com contador de requisições já disponível
   - Verify: `npm test` roda e passa com a suíte inicial
   - Files: `package.json`, `vitest.config.ts`, `tests/helpers/fake-http-client.ts`, `tests/unit/setup.test.ts`
 
-- [ ] **T03 — ESLint estrito, com exceção temporária para o código legado**
+- [x] **T03 — ESLint estrito, com exceção temporária para o código legado**
   - Acceptance: `no-console` e `@typescript-eslint/no-explicit-any` como `error`; `overrides` isentando `src/lib/**`, `src/zappy-api.ts`, `src/types.ts` — a isenção é removida em T27, quando esses arquivos deixam de existir
   - Verify: `npm run lint` passa; remover a isenção à mão faz falhar (prova que a regra está ativa)
   - Files: `.eslintrc.json`
 
 ## Pré-requisito do codegen
 
-- [ ] **T04 — Hierarquia de erros**
+- [x] **T04 — Hierarquia de erros**
   - Acceptance: `ZdkError` abstrata com `code`, `cause`, `attempts`, `retryable`; subclasses `ZdkConfigError`, `ZdkNetworkError`, `ZdkTimeoutError`, `ZdkAbortError`, `ZdkUnsupportedOperationError`, `ZdkHttpError` (com `status`, `payload`) e as seis filhas de HTTP; `instanceof` funciona após build (sem quebrar a cadeia de protótipo em ES2022)
   - Verify: `npx vitest run tests/unit/errors.test.ts`
   - Files: `src/core/errors.ts`, `tests/unit/errors.test.ts`
 
-- [ ] **T05 — `parseBaseUrl` e `parseToken`**
+- [x] **T05 — `parseBaseUrl` e `parseToken`**
   - Acceptance: as duas tabelas de §5.6 valendo — 11 vetores rejeitados, formas equivalentes normalizadas, apex rejeitado, rótulo `api-<tenant>` exigido com escape `strictApiHost`; token 250 + ASCII imprimível com `trim` e escape `strictTokenLength`; **mensagem de erro nunca contém o token**; fallback `ZAPPY_URL`/`ZAPPY_TOKEN`; config congelada
   - Verify: `npx vitest run tests/unit/config.test.ts tests/unit/token.test.ts`; `grep -rn "dotenv" src/` vazio
   - Files: `src/core/config.ts`, `tests/unit/config.test.ts`, `tests/unit/token.test.ts`
 
 ## F1 — Codegen
 
-- [ ] **T06 — `sync:api` etapa 1: baixar, salvar, relatar**
+- [x] **T06 — `sync:api` etapa 1: baixar, salvar, relatar**
   - Acceptance: aceita N `--url`, valida por `parseBaseUrl`, baixa `/swagger.json`, salva em `tests/fixtures/swagger-<label>.json`, imprime e grava `docs/API-DIVERGENCE.md` com contagens e exclusivos por instância. **Sem união ainda**
   - Verify: `npm run sync:api -- --url <zapcontabil> --url <zapplataforma>` reproduz 48/43, as 5 ops só em zapcontabil e `ticketStrategy` só em zapplataforma
   - Files: `scripts/sync-api.ts`, `package.json`, `docs/API-DIVERGENCE.md`
 
-- [ ] **T07 — `sync:api` etapa 2: união + geração de tipos**
+- [x] **T07 — `sync:api` etapa 2: união + geração de tipos**
   - Acceptance: união de `paths` e de propriedades de `components.schemas`, alargando divergências; `required: true` inline inválido removido antes de gerar; invoca `openapi-typescript` produzindo `src/generated/openapi.d.ts` com header "não editar"
   - Verify: teste de união com dois documentos sintéticos pequenos (R1); depois `npm run sync:api` real e `npx tsc --noEmit` no arquivo gerado
   - Files: `scripts/sync-api.ts`, `src/generated/openapi.d.ts`, `tests/unit/sync-api.merge.test.ts`
 
-- [ ] **T08 — Camada de tipos `OperationKey`/`ApiBody`/`ApiResponse`**
+- [x] **T08 — Camada de tipos `OperationKey`/`ApiBody`/`ApiResponse`**
   - Acceptance: transcreve o código já validado no spike (§5.1), incluindo o filtro de verbo `undefined` e o content-type como parâmetro
   - Verify: `npm run test:types` — asserções: `"PUT /api/connections"` **rejeitado**, `"DELETE /api/webhooks/{id}"` aceito, body de `POST /api/send/{to}` = `SendMessage`, os dois content-types de `POST /api/send/{type}/{to}` resolvendo para schemas distintos, Q18 (`ApiResponse<"GET /api/connections">` sem `connections`)
   - Files: `src/core/operation.ts`, `tests/types/operation.test-d.ts`
 
 ## F3 — Core sem rede (T09–T12 paralelizáveis entre si)
 
-- [ ] **T09 — `error-mapper`**
+- [x] **T09 — `error-mapper`**
   - Acceptance: status + código `ERR_*` do corpo + `errorData` → instância correta; `ERR_OFFICIAL_API_WINDOW_CLOSED` → `ZdkOfficialApiWindowError`; `ERR_INVALID_API_KEY` e `ERR_NO_AUTH_HEADER_PRESENT` distinguíveis por `code`; `payload` preserva o corpo inteiro (Q17); corpo não-JSON não explode
   - Verify: `npx vitest run tests/unit/error-mapper.test.ts`
   - Files: `src/core/error-mapper.ts`, `tests/unit/error-mapper.test.ts`
 
-- [ ] **T10 — `backoff`**
+- [x] **T10 — `backoff`**
   - Acceptance: função pura, exponencial com full jitter, `random` e `sleep` injetados; respeita `baseDelayMs`/`maxDelayMs`; `Math.random` só no default
   - Verify: `npx vitest run tests/unit/backoff.test.ts` com `vi.useFakeTimers()` — a suíte não dorme
   - Files: `src/core/backoff.ts`, `tests/unit/backoff.test.ts`
 
-- [ ] **T11 — `rate-limit`**
+- [x] **T11 — `rate-limit`**
   - Acceptance: parseia `x-ratelimit-*` **e** `ratelimit-*`; header ausente → `null`; espera derivada de `reset − date` do servidor, **nunca** de `Date.now()`; `maxRetryAfterMs` respeitado; modos `observe` (default, nunca dorme) e `throttle`
   - Verify: `npx vitest run tests/unit/rate-limit.test.ts` — inclui teste com relógio local deslocado em 1h
   - Files: `src/core/rate-limit.ts`, `tests/unit/rate-limit.test.ts`
 
-- [ ] **T12 — `request-builder`**
+- [x] **T12 — `request-builder`**
   - Acceptance: substitui path params, monta query omitindo `undefined`, monta JSON e multipart, define `Authorization`; marca requisição não-retryável quando o corpo não é `string`/`Blob`/`Buffer`/`FormData` em memória (R5)
   - Verify: `npx vitest run tests/unit/request-builder.test.ts` — **teste de regressão do bug `dateToo` escrito antes da correção**, e teste com corpo `ReadableStream`
   - Files: `src/core/request-builder.ts`, `tests/unit/request-builder.test.ts`
 
 ## F4 — Overrides (paralelo a F3)
 
-- [ ] **T13 — `schema/overrides.ts` e `schema/types.ts`**
-  - Acceptance: `API_QUIRKS` com as 22 entradas (id, ponto do contrato, motivo); `CONNECTION_STATUS` incluindo `WHATSAPP_AUTH` (Q1); `Required<>`/`RequiredBy<>` por schema (Q2/Q3); resposta de `connections` corrigida para `{connections: Connection[]}` (Q18); tipos públicos sem prefixo `I`
+- [x] **T13 — `schema/overrides.ts` e `schema/types.ts`**
+  - Acceptance: `API_QUIRKS` com as 21 entradas (id, ponto do contrato, motivo); `CONNECTION_STATUS` incluindo `WHATSAPP_AUTH` (Q1); `Required<>`/`RequiredBy<>` por schema (Q2/Q3); resposta de `connections` corrigida para `{connections: Connection[]}` (Q18); tipos públicos sem prefixo `I`
   - Verify: `npx vitest run tests/contract/quirks.test.ts` — cada quirk conferido contra **os dois** snapshots; falha quando a Zappy corrigir algum
   - Files: `src/schema/overrides.ts`, `src/schema/types.ts`, `tests/contract/quirks.test.ts`
 
 ## F5 — Transporte (sequencial)
 
-- [ ] **T14 — `http-client`**
+- [x] **T14 — `http-client`**
   - Acceptance: interface `HttpClient` mínima + `FetchHttpClient`; timeout por tentativa via `AbortSignal.timeout` composto com o signal do consumidor por `AbortSignal.any`; distingue timeout (`ZdkTimeoutError`) de abort do consumidor (`ZdkAbortError`); erro de transporte lê `error.cause.code` (R4)
   - Verify: `npx vitest run tests/unit/http-client.test.ts` — erros sintéticos com `cause.code` `ENOTFOUND`/`ECONNREFUSED`/`ECONNRESET`; na dúvida classifica como ambíguo
   - Files: `src/core/http-client.ts`, `tests/unit/http-client.test.ts`
 
-- [ ] **T15 — `operation-metadata` das 48 operações**
+- [x] **T15 — `operation-metadata` das 48 operações**
   - Acceptance: cada `OperationKey` com `retryClass` (`safe`/`guarded`/`unsafe`) e timeout default conforme §5.8.1/§5.8.3; os 9 POSTs de envio, `resolve` e as criações como `unsafe`; bulk 120s, upload/mídia 60s
   - Verify: `npx vitest run tests/contract/metadata.test.ts` — falha se qualquer operação da união ficar sem classe ou sem timeout (R3)
   - Files: `src/core/operation-metadata.ts`, `tests/contract/metadata.test.ts`
 
-- [ ] **T16 — `retry` e `semaphore`**
+- [x] **T16 — `retry` e `semaphore`**
   - Acceptance: executor aplicando a matriz de §5.8.3 (falha × classe); `retryOnTimeout: false`, `retryUnsafeOnRateLimit: false`; `Retry-After` em segundos e em HTTP-date; `deadlineMs: null`; hooks `onRetry`/`shouldRetry`; `maxConcurrent` ilimitado por default; `attempts` e `retryable` populados no erro
   - Verify: `npx vitest run tests/unit/retry.test.ts` — matriz completa como `test.each`, fake timers; **nenhum retry de `unsafe` em timeout ou 5xx**
   - Files: `src/core/retry.ts`, `src/core/semaphore.ts`, `tests/unit/retry.test.ts`
 
-- [ ] **T17 — `capabilities`**
+- [x] **T17 — `capabilities`**
   - Acceptance: busca `/swagger.json` da instância, monta `ReadonlySet` de `"MÉTODO /path"`, cacheia; `supports(key)`; falha de busca não bloqueia (registra e assume suportado)
   - Verify: `npx vitest run tests/unit/capabilities.test.ts` com swagger fake — `supports("GET /api/webhooks")` `false` contra o snapshot da zapplataforma, `true` contra o da zapcontabil
   - Files: `src/core/capabilities.ts`, `tests/unit/capabilities.test.ts`
 
-- [ ] **T18 — `api-client` e remoção de `axios`/`form-data`**
-  - Acceptance: `request<K extends OperationKey>()` compondo builder + http-client + retry + semáforo + rate-limit; upgrade de `404` em path conhecido para `ZdkUnsupportedOperationError` buscando o swagger **só nesse caso**; `verifyCapabilities` opcional; `dependencies` do `package.json` **vazio**
-  - Verify: `npx vitest run tests/unit/api-client.test.ts` — chamada OK faz **1** requisição, chamada com `404` faz **2**; `grep -rn "axios\|form-data" src/` vazio
-  - Files: `src/core/api-client.ts`, `package.json`, `tests/unit/api-client.test.ts`
+- [x] **T18 — `api-client`**
+  - Acceptance: `request<K extends OperationKey>()` compondo builder + http-client + retry + semáforo + rate-limit; upgrade de `404` em path conhecido para `ZdkUnsupportedOperationError` buscando o swagger **só nesse caso**; `verifyCapabilities` opcional
+  - Verify: `npx vitest run tests/unit/api-client.test.ts` — chamada OK faz **1** requisição, chamada com `404` faz **2**
+  - Files: `src/core/api-client.ts`, `tests/unit/api-client.test.ts`, `tests/types/api-client.test-d.ts`
+  - **Ajuste de escopo, descoberto na execução:** a remoção de `axios`/`form-data` e o `grep` vazio saíram daqui. `src/lib/*` e `src/zappy-api.ts` (v0.7) ainda importam os dois, e só morrem na T27 — remover as dependências agora quebraria o build por 8 tarefas (T19–T26) sem nenhum substituto ainda no ar. Motivo idêntico ao que empurrou `errors.ts`/`config.ts` para antes do codegen (F0.5): a ordem só fica visível ao escrever o código de verdade, não no diagrama. `dependencies` vazio e o `grep` viram critério da **T27**, onde o código legado de fato desaparece.
 
 ## F6 — Recursos (T20–T21 e T24–T25 paralelos após T19)
 
@@ -154,10 +155,10 @@
   - Verify: `npx vitest run tests/integration/verify.test.ts` — `new Zdk()` faz **zero** requisições, `Zdk.connect()` **exatamente uma**, provado por contador
   - Files: `src/zdk.ts`, `tests/integration/verify.test.ts`
 
-- [ ] **T27 — Barrel público e remoção do código v0.7**
-  - Acceptance: `src/index.ts` exportando só a superfície pretendida; apagados `src/lib/*` (7 arquivos), `src/zappy-api.ts`, `src/types.ts`; isenção de ESLint de T03 removida
-  - Verify: `npm run verify`; `grep -rn "IError\|makeRequest" src/` vazio; `npm run lint` passa **sem** a isenção
-  - Files: `src/index.ts`, `.eslintrc.json`, + remoções
+- [ ] **T27 — Barrel público, remoção do código v0.7 e de `axios`/`form-data` (2º marco)**
+  - Acceptance: `src/index.ts` exportando só a superfície pretendida; apagados `src/lib/*` (7 arquivos), `src/zappy-api.ts`, `src/types.ts`; isenção de ESLint de T03 removida; **`axios`/`form-data` saem de `dependencies`** — herdado de T18, que não podia fazer isso ainda porque os arquivos legados que os usam só morrem aqui
+  - Verify: `npm run verify`; `grep -rn "IError\|makeRequest" src/` vazio; `grep -rn "axios\|form-data" src/` vazio; `npm run lint` passa **sem** a isenção
+  - Files: `src/index.ts`, `.eslintrc.json`, `package.json`, + remoções
 
 ## F8 — Contrato
 
@@ -194,11 +195,12 @@
 
 ## Marcos de revisão
 
-Quatro pontos onde vale parar e olhar antes de seguir:
+Cinco pontos onde vale parar e olhar antes de seguir (eram quatro; T18 perdeu o marco de "dependencies vazio" — ver nota da própria T18 — e ele passou para T27):
 
 | Depois de | Por quê |
 |---|---|
 | **T08** | a camada de tipos é a fundação; se `OperationKey` não estiver certa, tudo acima nasce torto |
-| **T18** | transporte pronto e `dependencies` vazio — o "zero deps" está provado ou não |
+| **T18** | transporte composto (builder + http-client + retry + semáforo + rate-limit + capabilities) e testado de ponta a ponta — `axios`/`form-data` ainda não saíram (ver nota da tarefa) |
 | **T23** | os dois recursos maiores (messages, tickets) prontos; o padrão dos demais está validado |
+| **T27** | `axios`/`form-data` fora de `dependencies` — o "zero deps" finalmente provado |
 | **T28** | 48/48 provado; a promessa central da lib é verificável a partir daqui |
