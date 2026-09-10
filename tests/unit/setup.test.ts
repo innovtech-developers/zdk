@@ -10,6 +10,7 @@ describe("infraestrutura de teste", () => {
       method: "GET",
       url: "https://api-x.zapcontabil.chat/api/connections",
       headers: { Authorization: "Bearer token" },
+      timeoutMs: 10_000,
     });
 
     expect(client.requestCount).toBe(1);
@@ -22,7 +23,7 @@ describe("infraestrutura de teste", () => {
     const client = new FakeHttpClient();
 
     await expect(
-      client.send({ method: "GET", url: "https://x", headers: {} }),
+      client.send({ method: "GET", url: "https://x", headers: {}, timeoutMs: 10_000 }),
     ).rejects.toThrow(/nenhuma resposta enfileirada/);
   });
 });

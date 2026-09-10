@@ -1,17 +1,12 @@
 /**
- * HttpClient de teste. Não importa nada de `src/core` de propósito: o contrato
- * (`send(request): Promise<Response>`) é estrutural, então a implementação real
- * (`FetchHttpClient`, T14) só precisa satisfazer a mesma forma — LSP sem acoplar
- * o helper de teste ao módulo de produção antes dele existir.
+ * HttpClient de teste. Implementa a interface real (`HttpClient`, T14) — a
+ * conformidade deixou de ser estrutural-por-coincidência (quando T14 ainda
+ * não existia) e passou a ser garantida pelo compilador via `implements`.
  */
 
-export interface FakeHttpRequest {
-  readonly method: string;
-  readonly url: string;
-  readonly headers: Readonly<Record<string, string>>;
-  readonly body?: string | FormData | Uint8Array;
-  readonly signal?: AbortSignal;
-}
+import type { HttpClient, HttpRequest } from "../../src/core/http-client";
+
+export type FakeHttpRequest = HttpRequest;
 
 export interface FakeResponseSpec {
   readonly status: number;
@@ -20,7 +15,7 @@ export interface FakeResponseSpec {
   readonly body?: unknown;
 }
 
-export class FakeHttpClient {
+export class FakeHttpClient implements HttpClient {
   readonly calls: FakeHttpRequest[] = [];
 
   private readonly queue: FakeResponseSpec[] = [];
@@ -34,7 +29,7 @@ export class FakeHttpClient {
     return this.calls.length;
   }
 
-  async send(request: FakeHttpRequest): Promise<Response> {
+  async send(request: HttpRequest): Promise<Response> {
     this.calls.push(request);
 
     const spec = this.queue.shift();
