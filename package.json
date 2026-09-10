@@ -8,10 +8,17 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "rm -rf ./dist && tsup",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
-    "docs:generate": "typedoc"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:types": "vitest --typecheck run",
+    "sync:api": "tsx scripts/sync-api.ts",
+    "docs:generate": "typedoc",
+    "verify": "npm run typecheck && npm run lint && npm test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -41,16 +48,23 @@
     "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
-    "dotenv": "^16.3.1",
+    "@vitest/coverage-v8": "^4.1.11",
+    "dotenv": "^16.6.1",
     "eslint": "^8.54.0",
+    "openapi-typescript": "^7.13.0",
     "prettier": "^3.1.0",
     "tsup": "^8.0.1",
+    "tsx": "^4.23.13",
     "typedoc": "^0.25.3",
     "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "^5.2.*"
+    "typescript": "^5.2.*",
+    "vitest": "^4.1.11"
   },
   "dependencies": {
     "axios": "^1.7.9",
     "form-data": "^4.0.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

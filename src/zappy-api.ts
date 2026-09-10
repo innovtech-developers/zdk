@@ -2,8 +2,8 @@ import type { HttpMethod } from "./types";
 import axios, { AxiosError } from "axios";
 
 export class ZappyApi {
-  private _rootUrl: string;
-  private _token: string;
+  private _rootUrl: string | undefined;
+  private _token: string | undefined;
 
   constructor(rootUrl?: string, token?: string) {
     this._rootUrl = rootUrl || process.env?.ZAPPY_URL;
@@ -42,11 +42,11 @@ export class ZappyApi {
         const errorMessage = errorData?.error || errorData?.message;
 
         // Handle if error is an object, convert to string
-        const messageStr = typeof errorMessage === 'string'
+        const messageStr = typeof errorMessage === "string"
           ? errorMessage
-          : typeof errorMessage === 'object' && errorMessage !== null
+          : typeof errorMessage === "object" && errorMessage !== null
             ? JSON.stringify(errorMessage)
-            : 'Unknown error';
+            : "Unknown error";
 
         throw new Error(messageStr);
       }
