@@ -18,7 +18,7 @@
     "test:types": "vitest --typecheck run",
     "sync:api": "tsx scripts/sync-api.ts",
     "docs:generate": "typedoc",
-    "verify": "npm run typecheck && npm run lint && npm test && npm run build"
+    "verify": "npm run typecheck && npm run lint && npm test && npm run test:types && npm run build"
   },
   "repository": {
     "type": "git",
