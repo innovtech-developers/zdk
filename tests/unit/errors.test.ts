@@ -44,6 +44,13 @@ describe("ZdkError", () => {
     expect(error.cause).toBe(cause);
   });
 
+  it("ZdkNetworkError carrega transportCode estruturado, sem exigir dig em cause.cause (R4)", () => {
+    const withCode = new ZdkNetworkError("falha de transporte: ENOTFOUND", { transportCode: "ENOTFOUND" });
+    const semCode = new ZdkNetworkError("falha de transporte");
+    expect(withCode.transportCode).toBe("ENOTFOUND");
+    expect(semCode.transportCode).toBeUndefined();
+  });
+
   it("cada subclasse tem code fixo e distinto", () => {
     expect(new ZdkConfigError("x").code).toBe("ZDK_CONFIG_ERROR");
     expect(new ZdkNetworkError("x").code).toBe("ZDK_NETWORK_ERROR");

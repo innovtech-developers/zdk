@@ -101,6 +101,7 @@ describe("FetchHttpClient", () => {
     } catch (error) {
       expect(error).toBeInstanceOf(ZdkNetworkError);
       expect((error as Error).message).toContain("ENOTFOUND");
+      expect((error as ZdkNetworkError).transportCode).toBe("ENOTFOUND");
     }
   });
 

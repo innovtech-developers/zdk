@@ -58,7 +58,7 @@ export class FetchHttpClient implements HttpClient {
       const code = hasStringCode(cause) ? cause.code : undefined;
       throw new ZdkNetworkError(
         code ? `falha de transporte: ${code}` : "falha de transporte",
-        { cause: error },
+        { cause: error, transportCode: code },
       );
     }
   }

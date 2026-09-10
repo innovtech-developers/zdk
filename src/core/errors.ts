@@ -4,10 +4,16 @@
  * como `T | IError` (v0.7).
  *
  * `attempts` e `retryable` existem em todo erro para o consumidor distinguir
- * "falhou de primeira" de "falhou após esgotar as tentativas". Quem popula
- * esses dois campos é o executor de retry (T16); aqui eles só têm default
- * seguro (1 tentativa, não retryable) para erros lançados fora do loop de
- * retry — como `ZdkConfigError`, que nunca chega a fazer requisição.
+ * "falhou de primeira" de "falhou após esgotar as tentativas". Diferente de
+ * `code`/`status`/`payload`/`cause` — fatos fixos no instante do evento —,
+ * estes dois são NÃO-readonly de propósito: descrevem o resultado do
+ * PROCESSO de retry ao redor do erro, que só se conclui depois que o erro já
+ * existe. Quem os popula é o executor de retry (T16), estampando na própria
+ * instância antes do `throw` final — não há reconstrução genérica de uma
+ * subclasse desconhecida, e a identidade do erro (`instanceof`) para quem
+ * captura rio abaixo continua intacta. Erro lançado fora do loop de retry
+ * (ex.: `ZdkConfigError`, que nunca chega a fazer requisição) fica só com o
+ * default seguro: 1 tentativa, não retryable.
  */
 
 export interface ZdkErrorOptions {
@@ -20,8 +26,10 @@ export abstract class ZdkError extends Error {
   abstract readonly code: string;
 
   readonly cause?: unknown;
-  readonly attempts: number;
-  readonly retryable: boolean;
+  /** Mutável — ver comentário do módulo. */
+  attempts: number;
+  /** Mutável — ver comentário do módulo. */
+  retryable: boolean;
 
   protected constructor(message: string, options: ZdkErrorOptions = {}) {
     super(message);
@@ -45,17 +53,25 @@ export class ZdkConfigError extends ZdkError {
   }
 }
 
-/**
- * Falha de transporte (DNS, conexão recusada, socket derrubado, …).
- * `cause` é o erro original do `fetch`/undici; `cause.code` (ex.: `ENOTFOUND`,
- * `ECONNREFUSED`, `ECONNRESET`) é o que o classificador de retry (T16) lê —
- * `fetch` nativo não expõe esse código em nenhum outro lugar (R4 do plano).
- */
+export interface ZdkNetworkErrorOptions extends ZdkErrorOptions {
+  /**
+   * Código real da falha de transporte (`ENOTFOUND`, `ECONNREFUSED`,
+   * `ECONNRESET`, …), extraído de `cause.cause.code` por quem constrói o
+   * erro (`http-client.ts`) — `fetch` nativo não expõe isso em nenhum outro
+   * lugar (R4 do plano). Estruturado aqui para o classificador de retry
+   * (T16) não precisar conhecer essa cadeia de `cause` aninhada.
+   */
+  readonly transportCode?: string;
+}
+
+/** Falha de transporte (DNS, conexão recusada, socket derrubado, …). */
 export class ZdkNetworkError extends ZdkError {
   readonly code = "ZDK_NETWORK_ERROR";
+  readonly transportCode?: string;
 
-  constructor(message: string, options: ZdkErrorOptions = {}) {
+  constructor(message: string, options: ZdkNetworkErrorOptions = {}) {
     super(message, options);
+    this.transportCode = options.transportCode;
   }
 }
 
