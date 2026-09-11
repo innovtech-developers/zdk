@@ -113,37 +113,37 @@
 
 ## F6 — Recursos (T20–T21 e T24–T25 paralelos após T19)
 
-- [ ] **T19 — `Resource` base e `connections`**
+- [x] **T19 — `Resource` base e `connections`**
   - Acceptance: classe base abstrata recebendo `ApiClient`; `connections.list()` desembrulhando `{connections:[...]}` (Q18); `get(id)` **estrito** (nunca devolve outro id, `ZdkNotFoundError` se ausente); `findUsable(preferredId?)` com `CONNECTED`/`WHATSAPP_AUTH`
   - Verify: `npx vitest run tests/integration/connections.test.ts` — cenário pedida `DISCONNECTED` + outra `CONNECTED`: `get` devolve a pedida, `findUsable` devolve a `CONNECTED`; lista vazia → `ZdkNotFoundError` nos dois
   - Files: `src/resources/resource.ts`, `src/resources/connections.ts`, `tests/integration/connections.test.ts`
 
-- [ ] **T20 — `contacts` e `tags`**
+- [x] **T20 — `contacts` e `tags`**
   - Acceptance: `contacts` com `list`/`get`/`create`/`update`/`setTags`; `tags` com `list`/`get`/`create`/`update`; nota do `POST /api/contacts/` e `POST /api/tags/` com barra final, como o contrato declara
   - Verify: `npx vitest run tests/integration/contacts.test.ts tests/integration/tags.test.ts` — método, URL, headers e body enviados ao fake conferem
   - Files: `src/resources/contacts.ts`, `src/resources/tags.ts`, `tests/integration/contacts.test.ts`, `tests/integration/tags.test.ts`
 
-- [ ] **T21 — `queues` e `users`**
+- [x] **T21 — `queues` e `users`**
   - Acceptance: `queues` com `list`/`get`/`create`/`update`/`createMany`/`listWithUsers`; `users` com `list`/`get` (inclui `search`)
   - Verify: `npx vitest run tests/integration/queues.test.ts tests/integration/users.test.ts`
   - Files: `src/resources/queues.ts`, `src/resources/users.ts`, `tests/integration/queues.test.ts`, `tests/integration/users.test.ts`
 
-- [ ] **T22 — `messages` e resolução do Q19**
+- [x] **T22 — `messages` e resolução do Q19**
   - Acceptance: `list` (com `dateTo` correto), `get`, `sendText`, `sendMedia` (multipart), `sendMediaByUrl` (json, Q20), `sendMany` (multipart com `files`, json sem, serializando `messages` como JSON string — Q7). **Q19 decidido com uma chamada real**: se a resposta vier `{message:...}`, entra override; senão fica como o contrato
   - Verify: `npx vitest run tests/integration/messages.test.ts`; Q19 registrado em `overrides.ts` com o resultado observado
   - Files: `src/resources/messages.ts`, `src/schema/overrides.ts`, `tests/integration/messages.test.ts`
 
-- [ ] **T23 — `tickets`** (a maior: 11 operações)
+- [x] **T23 — `tickets`** (a maior: 11 operações)
   - Acceptance: `list`, `searchByContact`, `get`, `update`, `transfer`, `resolve`, `sendText`, `sendMedia`, `sendMediaByUrl`, `sendAndClose`, `info`, `sendTemplate` — com `id` obrigatório em `sendTemplate` apesar do contrato marcá-lo opcional (Q4)
   - Verify: `npx vitest run tests/integration/tickets.test.ts` — uma asserção por operação
   - Files: `src/resources/tickets.ts`, `tests/integration/tickets.test.ts`
 
-- [ ] **T24 — `templates` e `storage`**
+- [x] **T24 — `templates` e `storage`**
   - Acceptance: `templates` com `list(connectionId)`, `send`, `sendBulk`; `storage` com `signedUrl` e `uploadTemp`; `connectionFrom` obrigatório no tipo de `send` (Q3); bulk devolve `results[]` com falha parcial (Q10)
   - Verify: `npx vitest run tests/integration/templates.test.ts tests/integration/storage.test.ts`
   - Files: `src/resources/templates.ts`, `src/resources/storage.ts`, `tests/integration/templates.test.ts`, `tests/integration/storage.test.ts`
 
-- [ ] **T25 — `webhooks`, `dashboard`, `metrics`**
+- [x] **T25 — `webhooks`, `dashboard`, `metrics`**
   - Acceptance: `webhooks` CRUD completo; `dashboard` com os três relatórios (params de array `userIds[]` etc. serializados corretamente); `metrics.messages`
   - Verify: `npx vitest run tests/integration/webhooks.test.ts tests/integration/dashboard.test.ts` — inclui `404` de webhook contra o snapshot da zapplataforma virando `ZdkUnsupportedOperationError`
   - Files: `src/resources/webhooks.ts`, `src/resources/dashboard.ts`, `src/resources/metrics.ts`, `tests/integration/webhooks.test.ts`, `tests/integration/dashboard.test.ts`
