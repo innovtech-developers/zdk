@@ -15,6 +15,8 @@ Vindo da v0.7? Veja [docs/MIGRATION.md](./docs/MIGRATION.md) — é um break lim
 npm install zdk
 ```
 
+Requer Node ≥ 20. Se seu projeto usa TypeScript, `@types/node` precisa estar nas suas próprias `devDependencies` (comum em qualquer projeto Node+TS) — sem `lib: "dom"`, `Response`/`Headers`/`FormData`/`ReadableStream` são todos tipados a partir de lá.
+
 ## Configuração
 
 ```ts
