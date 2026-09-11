@@ -162,7 +162,7 @@
 
 ## F8 — Contrato
 
-- [ ] **T28 — Teste de cobertura bidirecional**
+- [x] **T28 — Teste de cobertura bidirecional**
   - Acceptance: toda `OperationKey` citada em `resources/` existe na união; **todo** path de cada snapshot tem método correspondente; nenhum método órfão
   - Verify: `npx vitest run tests/contract/coverage.test.ts` — 48/48; falha se uma operação for esquecida
   - Files: `tests/contract/coverage.test.ts`
