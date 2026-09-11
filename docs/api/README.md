@@ -108,7 +108,7 @@ Renames and re-exports [Zdk](classes/Zdk.md)
 
 #### Defined in
 
-[src/core/operation.ts:51](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/operation.ts#L51)
+[src/core/operation.ts:51](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/operation.ts#L51)
 
 ___
 
@@ -126,7 +126,7 @@ Três operações aceitam dois content-types (Q20), então ele é parâmetro.
 
 #### Defined in
 
-[src/core/operation.ts:46](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/operation.ts#L46)
+[src/core/operation.ts:46](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/operation.ts#L46)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[src/core/operation.ts:63](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/operation.ts#L63)
+[src/core/operation.ts:63](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/operation.ts#L63)
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 #### Defined in
 
-[src/core/operation.ts:56](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/operation.ts#L56)
+[src/core/operation.ts:56](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/operation.ts#L56)
 
 ___
 
@@ -170,7 +170,7 @@ Q1: `status` aceita `WHATSAPP_AUTH`, ausente do enum do contrato.
 
 #### Defined in
 
-[src/schema/types.ts:45](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L45)
+[src/schema/types.ts:45](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L45)
 
 ___
 
@@ -180,7 +180,7 @@ ___
 
 #### Defined in
 
-[src/schema/overrides.ts:64](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/overrides.ts#L64)
+[src/schema/overrides.ts:64](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/overrides.ts#L64)
 
 ___
 
@@ -190,7 +190,7 @@ ___
 
 #### Defined in
 
-[src/schema/types.ts:177](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L177)
+[src/schema/types.ts:177](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L177)
 
 ___
 
@@ -204,7 +204,7 @@ os marca obrigatórios (defaultNonNullable), mas o servidor aceita omissão.
 
 #### Defined in
 
-[src/schema/types.ts:146](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L146)
+[src/schema/types.ts:146](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L146)
 
 ___
 
@@ -216,7 +216,7 @@ Q24: `replaceTags`/`createTagIfNotExists` têm `default` — servidor aceita omi
 
 #### Defined in
 
-[src/schema/types.ts:154](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L154)
+[src/schema/types.ts:154](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L154)
 
 ___
 
@@ -226,7 +226,7 @@ ___
 
 #### Defined in
 
-[src/core/retry.ts:54](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L54)
+[src/core/retry.ts:54](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L54)
 
 ___
 
@@ -241,7 +241,7 @@ contrato. `from` fica opcional de propósito — ausente na amostra real.
 
 #### Defined in
 
-[src/schema/types.ts:69](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L69)
+[src/schema/types.ts:69](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L69)
 
 ___
 
@@ -256,7 +256,7 @@ amostra suficiente para conhecer a taxonomia real inteira — widened para
 
 #### Defined in
 
-[src/schema/types.ts:100](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L100)
+[src/schema/types.ts:100](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L100)
 
 ___
 
@@ -268,7 +268,7 @@ Toda operação que existe de fato no contrato. Ex: `"POST /api/send/{to}"`.
 
 #### Defined in
 
-[src/core/operation.ts:25](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/operation.ts#L25)
+[src/core/operation.ts:25](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/operation.ts#L25)
 
 ___
 
@@ -278,7 +278,7 @@ ___
 
 #### Defined in
 
-[src/schema/types.ts:179](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L179)
+[src/schema/types.ts:179](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L179)
 
 ___
 
@@ -288,7 +288,7 @@ ___
 
 #### Defined in
 
-[src/core/operation-metadata.ts:17](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/operation-metadata.ts#L17)
+[src/core/operation-metadata.ts:17](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/operation-metadata.ts#L17)
 
 ___
 
@@ -300,7 +300,7 @@ ___
 
 #### Defined in
 
-[src/schema/types.ts:137](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L137)
+[src/schema/types.ts:137](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L137)
 
 ___
 
@@ -312,7 +312,7 @@ Q3: `connectionFrom` tem `required: true` inline no schema — ignorado pelo cod
 
 #### Defined in
 
-[src/schema/types.ts:117](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L117)
+[src/schema/types.ts:117](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L117)
 
 ___
 
@@ -322,7 +322,7 @@ ___
 
 #### Defined in
 
-[src/schema/types.ts:178](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L178)
+[src/schema/types.ts:178](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L178)
 
 ___
 
@@ -338,7 +338,7 @@ enxuto em alguns contratos). Sem prefixo `I`, ao contrário da v0.7
 
 #### Defined in
 
-[src/schema/types.ts:176](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L176)
+[src/schema/types.ts:176](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L176)
 
 ___
 
@@ -350,7 +350,7 @@ Q24: `feedbackOption` tem `default: "none"` — servidor aceita omissão.
 
 #### Defined in
 
-[src/schema/types.ts:162](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L162)
+[src/schema/types.ts:162](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L162)
 
 ___
 
@@ -365,7 +365,7 @@ também vira `string` puro no codegen — `BinaryField` aceita `Blob`/
 
 #### Defined in
 
-[src/schema/types.ts:127](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L127)
+[src/schema/types.ts:127](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L127)
 
 ___
 
@@ -377,7 +377,7 @@ Q3: `url`/`filename`/`success` têm `required: true` inline — ignorado pelo co
 
 #### Defined in
 
-[src/schema/types.ts:132](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L132)
+[src/schema/types.ts:132](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L132)
 
 ___
 
@@ -387,7 +387,7 @@ ___
 
 #### Defined in
 
-[src/schema/types.ts:180](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L180)
+[src/schema/types.ts:180](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L180)
 
 ___
 
@@ -397,7 +397,7 @@ ___
 
 #### Defined in
 
-[src/schema/types.ts:181](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L181)
+[src/schema/types.ts:181](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L181)
 
 ___
 
@@ -409,7 +409,7 @@ Q24: `active` tem `default: true` — servidor aceita omissão.
 
 #### Defined in
 
-[src/schema/types.ts:167](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/types.ts#L167)
+[src/schema/types.ts:167](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/types.ts#L167)
 
 ## Variables
 
@@ -419,7 +419,7 @@ Q24: `active` tem `default: true` — servidor aceita omissão.
 
 #### Defined in
 
-[src/schema/overrides.ts:22](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/overrides.ts#L22)
+[src/schema/overrides.ts:22](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/overrides.ts#L22)
 
 ___
 
@@ -435,7 +435,7 @@ reais, 7 estavam `WHATSAPP_AUTH` e 2 estavam `qrcode`.
 
 #### Defined in
 
-[src/schema/overrides.ts:56](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/overrides.ts#L56)
+[src/schema/overrides.ts:56](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/overrides.ts#L56)
 
 ___
 
@@ -445,7 +445,7 @@ ___
 
 #### Defined in
 
-[src/core/retry.ts:43](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L43)
+[src/core/retry.ts:43](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L43)
 
 ___
 
@@ -457,7 +457,7 @@ ___
 
 #### Defined in
 
-[src/core/semaphore.ts:42](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/semaphore.ts#L42)
+[src/core/semaphore.ts:42](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/semaphore.ts#L42)
 
 ## Functions
 
@@ -479,7 +479,7 @@ Classifica o erro capturado numa das categorias da tabela — pura, sem I/O.
 
 #### Defined in
 
-[src/core/retry.ts:69](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L69)
+[src/core/retry.ts:69](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L69)
 
 ___
 
@@ -503,7 +503,7 @@ A tabela de §5.8.3, como função.
 
 #### Defined in
 
-[src/core/retry.ts:84](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L84)
+[src/core/retry.ts:84](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L84)
 
 ___
 
@@ -527,4 +527,4 @@ ___
 
 #### Defined in
 
-[src/schema/overrides.ts:71](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/schema/overrides.ts#L71)
+[src/schema/overrides.ts:71](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/schema/overrides.ts#L71)

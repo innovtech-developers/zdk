@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[src/core/retry.ts:21](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L21)
+[src/core/retry.ts:21](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L21)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[src/core/retry.ts:22](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L22)
+[src/core/retry.ts:22](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L22)
 
 ___
 
@@ -49,7 +49,7 @@ Teto de wall clock do total de tentativas. `null` = sem teto (default; pior caso
 
 #### Defined in
 
-[src/core/retry.ts:33](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L33)
+[src/core/retry.ts:33](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L33)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[src/core/retry.ts:23](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L23)
+[src/core/retry.ts:23](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L23)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[src/core/retry.ts:25](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L25)
+[src/core/retry.ts:25](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L25)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[src/core/retry.ts:38](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L38)
+[src/core/retry.ts:38](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L38)
 
 ___
 
@@ -119,7 +119,7 @@ Math.random
 
 #### Defined in
 
-[src/core/retry.ts:35](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L35)
+[src/core/retry.ts:35](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L35)
 
 ___
 
@@ -131,7 +131,7 @@ Rege `safe`/`guarded` em 429. RFC 9110: rejeitado antes do processamento.
 
 #### Defined in
 
-[src/core/retry.ts:29](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L29)
+[src/core/retry.ts:29](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L29)
 
 ___
 
@@ -143,7 +143,7 @@ Master switch: por padrão, NENHUMA classe repete em timeout — ambíguo por na
 
 #### Defined in
 
-[src/core/retry.ts:27](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L27)
+[src/core/retry.ts:27](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L27)
 
 ___
 
@@ -155,7 +155,7 @@ Rege `unsafe` em 429 — desligado até o código do limitador ser identificado 
 
 #### Defined in
 
-[src/core/retry.ts:31](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L31)
+[src/core/retry.ts:31](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L31)
 
 ___
 
@@ -181,7 +181,7 @@ ___
 
 #### Defined in
 
-[src/core/retry.ts:40](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L40)
+[src/core/retry.ts:40](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L40)
 
 ___
 
@@ -211,4 +211,4 @@ setTimeout-based sleep
 
 #### Defined in
 
-[src/core/retry.ts:37](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/retry.ts#L37)
+[src/core/retry.ts:37](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/retry.ts#L37)

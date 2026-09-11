@@ -31,4 +31,4 @@ Resolve quando há vaga; devolve a função de liberar (chamar sempre, inclusive
 
 #### Defined in
 
-[src/core/semaphore.ts:10](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/semaphore.ts#L10)
+[src/core/semaphore.ts:10](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/semaphore.ts#L10)

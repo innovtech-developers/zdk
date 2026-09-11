@@ -39,7 +39,7 @@ lote em upgrade da v0.7.
 
 #### Defined in
 
-[src/core/semaphore.ts:17](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/semaphore.ts#L17)
+[src/core/semaphore.ts:17](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/semaphore.ts#L17)
 
 ## Methods
 
@@ -59,4 +59,4 @@ Resolve quando há vaga; devolve a função de liberar (chamar sempre, inclusive
 
 #### Defined in
 
-[src/core/semaphore.ts:23](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/semaphore.ts#L23)
+[src/core/semaphore.ts:23](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/semaphore.ts#L23)

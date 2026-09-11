@@ -41,7 +41,7 @@ ZdkConfigInput.baseUrl
 
 #### Defined in
 
-[src/core/config.ts:116](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/config.ts#L116)
+[src/core/config.ts:116](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/config.ts#L116)
 
 ___
 
@@ -59,7 +59,7 @@ Timeout global de fallback — só vale para operação sem motivo técnico pró
 
 #### Defined in
 
-[src/zdk.ts:36](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L36)
+[src/zdk.ts:36](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L36)
 
 ___
 
@@ -85,7 +85,7 @@ Observa o orçamento de rate limit em toda resposta com os headers presentes —
 
 #### Defined in
 
-[src/zdk.ts:42](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L42)
+[src/zdk.ts:42](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L42)
 
 ___
 
@@ -101,7 +101,7 @@ Comportamento de rate limit (§5.8.4).
 
 #### Defined in
 
-[src/zdk.ts:40](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L40)
+[src/zdk.ts:40](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L40)
 
 ___
 
@@ -113,7 +113,7 @@ Parcial: mesclado por cima de DEFAULT_RETRY_CONFIG (não precisa especificar tod
 
 #### Defined in
 
-[src/zdk.ts:34](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L34)
+[src/zdk.ts:34](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L34)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:32](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L32)
+[src/zdk.ts:32](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L32)
 
 ___
 
@@ -137,7 +137,7 @@ ZdkConfigInput.strictApiHost
 
 #### Defined in
 
-[src/core/config.ts:119](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/config.ts#L119)
+[src/core/config.ts:119](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/config.ts#L119)
 
 ___
 
@@ -151,7 +151,7 @@ ZdkConfigInput.strictTokenLength
 
 #### Defined in
 
-[src/core/config.ts:120](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/config.ts#L120)
+[src/core/config.ts:120](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/config.ts#L120)
 
 ___
 
@@ -171,7 +171,7 @@ ZdkConfigInput.token
 
 #### Defined in
 
-[src/core/config.ts:118](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/config.ts#L118)
+[src/core/config.ts:118](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/config.ts#L118)
 
 ___
 
@@ -189,4 +189,4 @@ false
 
 #### Defined in
 
-[src/zdk.ts:38](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L38)
+[src/zdk.ts:38](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L38)
