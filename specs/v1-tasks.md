@@ -169,7 +169,7 @@
 
 ## F9 — Documentação
 
-- [ ] **T29 — README e MIGRATION**
+- [x] **T29 — README e MIGRATION**
   - Acceptance: README com instalação, config por objeto, quickstart, tabela dos 12 recursos, erros tipados, `supports()`, **cálculo do pior caso de wall clock em destaque**; `MIGRATION.md` com tabela antes/depois por método e as quebras (construtor, fim do `T | IError`, renomes, `send` → `sendText`/`sendMedia`)
   - Verify: leitura; todo exemplo de código copiado para um arquivo temporário compila
   - Files: `README.md`, `docs/MIGRATION.md`
