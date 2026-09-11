@@ -9,9 +9,20 @@
 
 import { Resource } from "./resource";
 import type { ApiBody, ApiParams, ApiResponse } from "../core/operation";
+import type { SendMediaMessageData } from "../schema/types";
 
 /** `{image, video, audio, voice, document}` — direto do path do contrato. */
 type MediaType = ApiParams<"POST /api/tickets/{id}/send/{type}">["path"]["type"];
+
+/**
+ * `files` do corpo de `send-and-close` é inline no swagger (não um schema
+ * nomeado) e vira `string[]` no codegen (`format: binary`) — widened para
+ * aceitar `Blob`/`Uint8Array` de verdade, mesmo caso de `BinaryField` em
+ * `schema/types.ts`, só que local por não ser um schema compartilhado.
+ */
+type SendAndCloseData = Omit<ApiBody<"POST /api/tickets/{id}/send-and-close">, "files"> & {
+  readonly files?: readonly (string | Blob | Uint8Array)[];
+};
 
 export class Tickets extends Resource {
   async list(params?: ApiParams<"GET /api/tickets">["query"]): Promise<ApiResponse<"GET /api/tickets">> {
@@ -65,7 +76,7 @@ export class Tickets extends Resource {
   async sendMedia(
     id: number,
     type: MediaType,
-    data: ApiBody<"POST /api/tickets/{id}/send/{type}", "multipart/form-data">,
+    data: SendMediaMessageData,
   ): Promise<ApiResponse<"POST /api/tickets/{id}/send/{type}">> {
     return this.client.request("POST /api/tickets/{id}/send/{type}", {
       pathParams: { id, type },
@@ -88,7 +99,7 @@ export class Tickets extends Resource {
   /** Só multipart no contrato — sem variante json. Resposta vem embrulhada: `{ message, ticket }`. */
   async sendAndClose(
     id: number,
-    data: ApiBody<"POST /api/tickets/{id}/send-and-close">,
+    data: SendAndCloseData,
   ): Promise<ApiResponse<"POST /api/tickets/{id}/send-and-close">> {
     return this.client.request("POST /api/tickets/{id}/send-and-close", {
       pathParams: { id },

@@ -7,6 +7,7 @@
 
 import { Resource } from "./resource";
 import type { ApiBody, ApiParams, ApiResponse } from "../core/operation";
+import type { Message, SendMediaMessageData, SendMessageResult } from "../schema/types";
 
 /** `{image, video, audio, voice, document}` — direto do path do contrato. */
 type MediaType = ApiParams<"POST /api/send/{type}/{to}">["path"]["type"];
@@ -22,23 +23,20 @@ export class Messages extends Resource {
 
   /**
    * `POST /api/send/{to}`.
-   * @remarks Q19 (em aberto): o contrato declara a resposta como `Message`
-   * puro — sem o wrapper `{message:...}` que a v0.7 assumia. Ainda não
-   * confirmado com uma chamada real e autenticada; o tipo aqui segue o
-   * contrato até essa confirmação (ver Open Questions da spec).
+   * @remarks Q19 — CONFIRMADO com uma chamada real e autenticada: o contrato
+   * declara `Message` puro, mas a resposta real vem embrulhada em
+   * `{message: Message}` (a v0.7 estava certa). Desembrulhado aqui.
    */
-  async sendText(
-    to: string,
-    data: ApiBody<"POST /api/send/{to}">,
-  ): Promise<ApiResponse<"POST /api/send/{to}">> {
-    return this.client.request("POST /api/send/{to}", { pathParams: { to }, json: data });
+  async sendText(to: string, data: ApiBody<"POST /api/send/{to}">): Promise<Message> {
+    const response = await this.client.request("POST /api/send/{to}", { pathParams: { to }, json: data });
+    return (response as unknown as SendMessageResult).message;
   }
 
   /** `POST /api/send/{type}/{to}`, multipart — arquivo binário (Q20). */
   async sendMedia(
     to: string,
     type: MediaType,
-    data: ApiBody<"POST /api/send/{type}/{to}", "multipart/form-data">,
+    data: SendMediaMessageData,
   ): Promise<ApiResponse<"POST /api/send/{type}/{to}">> {
     return this.client.request("POST /api/send/{type}/{to}", {
       pathParams: { type, to },

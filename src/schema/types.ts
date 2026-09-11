@@ -16,6 +16,17 @@ import { CONNECTION_STATUS, type ConnectionStatus } from "./overrides";
  */
 export type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 
+/**
+ * Campo `format: binary` do swagger vira `string` no codegen — mas quem
+ * chama tem bytes em memória (`Blob`/`Uint8Array`), não uma string pronta.
+ * Achado escrevendo `storage.uploadTemp()` (T24): `UploadTempData` sem isso
+ * rejeitava um `Blob` de verdade, o mesmo bug que os testes de `messages`/
+ * `tickets` mascaravam com `as never` em vez de corrigir.
+ */
+export type BinaryField<T, K extends keyof T> = Omit<T, K> & {
+  readonly [P in K]: string | Blob | Uint8Array;
+};
+
 type RawConnection = components["schemas"]["Connection"];
 
 /** Q1: `status` aceita `WHATSAPP_AUTH`, ausente do enum do contrato. */
@@ -34,6 +45,84 @@ export type Connection = RequiredBy<
 export interface ConnectionList {
   readonly connections: readonly Connection[];
 }
+
+type RawMessage = components["schemas"]["Message"];
+
+/**
+ * Q21 — corrigido com uma resposta real de `POST /api/send/{to}`
+ * (id="3EB071E13637D7398E4911", subtype="text", isMedia=false,
+ * myContact=false): nenhum dos quatro bate com o tipo documentado no
+ * contrato. `from` fica opcional de propósito — ausente na amostra real.
+ */
+export type Message = RequiredBy<
+  Omit<RawMessage, "id" | "subtype" | "isMedia" | "myContact">,
+  "body" | "type" | "contactId" | "ticketId"
+> & {
+  /** Contrato declara `integer`; valor real é o ID da mensagem no WhatsApp (string). */
+  readonly id: string;
+  /** Contrato declara `integer`; valor real observado é string (ex.: `"text"`). */
+  readonly subtype: string;
+  /** Contrato declara `string`; valor real observado é boolean. */
+  readonly isMedia: boolean;
+  /** Contrato declara `string`; valor real observado é boolean. */
+  readonly myContact: boolean;
+};
+
+/**
+ * Q19 — CONFIRMADO com uma chamada real: `POST /api/send/{to}` embrulha a
+ * resposta em `{ message: Message }` (a v0.7 estava certa; o contrato, que
+ * declara `Message` puro, está errado).
+ */
+export interface SendMessageResult {
+  readonly message: Message;
+}
+
+type RawMessageTemplate = components["schemas"]["MessageTemplate"];
+
+/**
+ * Q23 — observado em produção: `type`/`status` reais não batem com os enums
+ * documentados (`type: "marketing-catalog"`, `status: "APPROVED"`). Sem
+ * amostra suficiente para conhecer a taxonomia real inteira — widened para
+ * `string` em vez de impor um enum que já se provou errado.
+ */
+export type MessageTemplate = Omit<RawMessageTemplate, "type" | "status"> & {
+  readonly type: string;
+  readonly status: string;
+};
+
+/**
+ * Q22 — CONFIRMADO com uma chamada real: `GET /api/connections/{id}/templates`
+ * declara `MessageTemplate` (objeto único) na resposta 200, mas o corpo real
+ * é `{ templates: MessageTemplate[] }` — mesmo padrão de Q18.
+ */
+export interface TemplateList {
+  readonly templates: readonly MessageTemplate[];
+}
+
+type RawSendTemplate = components["schemas"]["SendTemplate"];
+
+/** Q3: `connectionFrom` tem `required: true` inline no schema — ignorado pelo codegen (Q2). */
+export type SendTemplateData = RequiredBy<RawSendTemplate, "connectionFrom">;
+
+type RawUploadTemp = components["schemas"]["UploadTemp"];
+
+/**
+ * Q3: `media` tem `required: true` inline — ignorado pelo codegen (único
+ * campo do schema, `Required<>` builtin resolve isso). `format: binary`
+ * também vira `string` puro no codegen — `BinaryField` aceita `Blob`/
+ * `Uint8Array` de verdade, não só uma string já pronta.
+ */
+export type UploadTempData = BinaryField<Required<RawUploadTemp>, "media">;
+
+type RawUploadTempResponse = components["schemas"]["UploadTempResponse"];
+
+/** Q3: `url`/`filename`/`success` têm `required: true` inline — ignorado pelo codegen. Únicos campos do schema. */
+export type UploadTempResponse = Required<RawUploadTempResponse>;
+
+type RawSendMediaMessage = components["schemas"]["SendMediaMessage"];
+
+/** `media` (`format: binary`) vira `string` puro no codegen — `Blob`/`Uint8Array` de verdade também são aceitos. */
+export type SendMediaMessageData = BinaryField<RawSendMediaMessage, "media">;
 
 export { CONNECTION_STATUS };
 export type { ConnectionStatus };

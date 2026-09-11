@@ -44,10 +44,10 @@ const bothInstances = [
 ];
 
 describe("registry API_QUIRKS", () => {
-  it("tem os 21 ids esperados, sem duplicata", () => {
+  it("tem os 23 ids esperados, sem duplicata", () => {
     const ids = API_QUIRKS.map((q) => q.id);
-    expect(ids).toHaveLength(21);
-    expect(new Set(ids).size).toBe(21);
+    expect(ids).toHaveLength(23);
+    expect(new Set(ids).size).toBe(23);
   });
 
   it("toda entrada tem id, at e reason não vazios", () => {
@@ -142,10 +142,44 @@ describe("Q20 — POST /api/send/{type}/{to} ainda tem os dois content-types", (
   });
 });
 
-describe("Q21 — Message.subtype ainda é integer", () => {
+describe("Q21 — Message.subtype ainda declarado integer no contrato (o valor REAL observado é string, ver schema/types.ts)", () => {
   it.each(bothInstances)("%s", (_label, doc) => {
     const subtype = doc.components.schemas["Message"]?.["properties"]?.["subtype"] as { type?: string } | undefined;
     expect(subtype?.type).toBe("integer");
+  });
+});
+
+describe("Q22 — GET /api/connections/{id}/templates: divergência ENTRE instâncias, não bug universal (Q15-style)", () => {
+  // zapcontabil ainda declara o objeto único (bug); zapplataforma já corrigiu
+  // para {templates: [...]}. A união (merge-openapi.ts, primeiro-vence)
+  // herda a forma do zapcontabil — por isso o override em schema/types.ts
+  // continua necessário mesmo com uma das duas instâncias já certa.
+  it("zapcontabil ainda declara MessageTemplate (objeto único) — o bug que motivou Q22", () => {
+    const schema = (
+      zapcontabil.paths["/api/connections/{id}/templates"]?.["get"]?.responses as
+        | Record<string, { content?: Record<string, { schema?: { $ref?: string } }> }>
+        | undefined
+    )?.["200"]?.content?.["application/json"]?.schema;
+    expect(schema?.$ref).toBe("#/components/schemas/MessageTemplate");
+  });
+
+  it("zapplataforma JÁ declara a forma correta {templates: MessageTemplate[]} — se isso regredir, a união muda de comportamento", () => {
+    const schema = (
+      zapplataforma.paths["/api/connections/{id}/templates"]?.["get"]?.responses as
+        | Record<string, { content?: Record<string, { schema?: { type?: string; properties?: Record<string, unknown> } }> }>
+        | undefined
+    )?.["200"]?.content?.["application/json"]?.schema;
+    expect(schema?.type).toBe("object");
+    expect(schema?.properties).toHaveProperty("templates");
+  });
+});
+
+describe("Q23 — MessageTemplate.type/status ainda com os enums documentados (o valor REAL observado não bate com nenhum, ver schema/types.ts)", () => {
+  it.each(bothInstances)("%s", (_label, doc) => {
+    const type = doc.components.schemas["MessageTemplate"]?.["properties"]?.["type"] as { enum?: readonly string[] } | undefined;
+    const status = doc.components.schemas["MessageTemplate"]?.["properties"]?.["status"] as { enum?: readonly string[] } | undefined;
+    expect(type?.enum).toEqual(["PHONE", "URL", "QUICK_REPLY", "COPY_CODE"]);
+    expect(status?.enum).toEqual(["no-sent", "wait-approval", "approved", "rejected", "blocked"]);
   });
 });
 
@@ -166,9 +200,13 @@ describe("quirks não verificáveis contra o documento (cobertos em outro lugar)
     expect(API_QUIRKS.find((q) => q.id === "Q16")).toBeDefined();
   });
 
-  it("Q7 (serialização de messages) e Q19 (wrapper de envio) — tests/integration/messages.test.ts (T22)", () => {
+  it("Q7 (serialização de messages) — tests/integration/messages.test.ts (T22)", () => {
     expect(API_QUIRKS.find((q) => q.id === "Q7")).toBeDefined();
+  });
+
+  it("Q19 (wrapper de envio, confirmado com chamada real) e Q21 (correção de tipos de Message) — tests/integration/messages.test.ts (T22/T24)", () => {
     expect(API_QUIRKS.find((q) => q.id === "Q19")).toBeDefined();
+    expect(API_QUIRKS.find((q) => q.id === "Q21")).toBeDefined();
   });
 
   it("Q15 (divergência entre instâncias) — tests/unit/divergence-report.test.ts, tests/unit/sync-api.merge.test.ts", () => {

@@ -47,13 +47,28 @@ describe("Messages.get", () => {
   });
 });
 
-describe("Messages.sendText", () => {
-  it("POST /api/send/{to} com corpo json", async () => {
+describe("Messages.sendText — Q19 confirmado com chamada real: resposta vem embrulhada", () => {
+  it("POST /api/send/{to} com corpo json, desembrulhando { message } da resposta real", async () => {
     const httpClient = new FakeHttpClient();
-    httpClient.enqueue({ status: 200, body: { id: 1, body: "olá" } });
+    // Payload real observado (T24), com o token e a mensagem de teste redigidos.
+    const realResponseShape = {
+      message: {
+        id: "3EB071E13637D7398E4911",
+        body: "olá",
+        type: "text",
+        subtype: "text",
+        isMedia: false,
+        myContact: false,
+        contactId: 162906,
+        ticketId: 355358,
+      },
+    };
+    httpClient.enqueue({ status: 200, body: realResponseShape });
     const data = { body: "olá", connectionFrom: 1 };
-    await makeMessages(httpClient).sendText("5511999999999", data as never);
+    const result = await makeMessages(httpClient).sendText("5511999999999", data);
 
+    expect(result).toEqual(realResponseShape.message);
+    expect(result).not.toHaveProperty("message"); // desembrulhado, não o wrapper inteiro
     expect(httpClient.calls[0]?.method).toBe("POST");
     expect(httpClient.calls[0]?.url).toBe(`${BASE_URL}/api/send/5511999999999`);
     expect(httpClient.calls[0]?.body).toBe(JSON.stringify(data));
@@ -67,7 +82,7 @@ describe("Messages.sendMedia — multipart (Q20)", () => {
     await makeMessages(httpClient).sendMedia("5511999999999", "image", {
       media: new Blob(["x"]),
       connectionFrom: 1,
-    } as never);
+    });
 
     expect(httpClient.calls[0]?.url).toBe(`${BASE_URL}/api/send/image/5511999999999`);
     expect(httpClient.calls[0]?.body).toBeInstanceOf(FormData);
@@ -80,7 +95,7 @@ describe("Messages.sendMediaByUrl — json, capacidade que a v0.7 nunca teve (Q2
     const httpClient = new FakeHttpClient();
     httpClient.enqueue({ status: 200, body: { id: 1 } });
     const data = { url: "https://exemplo.com/imagem.png", connectionFrom: 1 };
-    await makeMessages(httpClient).sendMediaByUrl("5511999999999", "image", data as never);
+    await makeMessages(httpClient).sendMediaByUrl("5511999999999", "image", data);
 
     expect(httpClient.calls[0]?.url).toBe(`${BASE_URL}/api/send/image/5511999999999`);
     expect(httpClient.calls[0]?.body).toBe(JSON.stringify(data));
@@ -93,7 +108,7 @@ describe("Messages.sendMany", () => {
     const httpClient = new FakeHttpClient();
     httpClient.enqueue({ status: 200, body: { id: "x" } });
     const messages = [{ body: "oi", fromMe: true, read: false }];
-    await makeMessages(httpClient).sendMany("5511999999999", messages as never);
+    await makeMessages(httpClient).sendMany("5511999999999", messages);
 
     expect(httpClient.calls[0]?.url).toBe(`${BASE_URL}/api/messages/multiple/5511999999999`);
     expect(httpClient.calls[0]?.body).toBe(JSON.stringify({ messages }));
@@ -105,7 +120,7 @@ describe("Messages.sendMany", () => {
     httpClient.enqueue({ status: 200, body: { id: "x" } });
     const messages = [{ body: "oi", fromMe: true, read: false }];
     const files = [new Blob(["a"]), new Blob(["b"])];
-    await makeMessages(httpClient).sendMany("5511999999999", messages as never, files);
+    await makeMessages(httpClient).sendMany("5511999999999", messages, files);
 
     const form = httpClient.calls[0]?.body as FormData;
     expect(form).toBeInstanceOf(FormData);
