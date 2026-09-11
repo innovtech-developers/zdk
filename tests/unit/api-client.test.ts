@@ -306,3 +306,68 @@ describe("ApiClient.request — rate limit", () => {
     expect(onRateLimit).not.toHaveBeenCalled();
   });
 });
+
+describe("ApiClient — modo throttle (§5.8.4, opt-in)", () => {
+  const rateLimitedResponse = (remaining: number) => ({
+    status: 200,
+    headers: {
+      "x-ratelimit-limit": "10000",
+      "x-ratelimit-remaining": String(remaining),
+      "x-ratelimit-reset": String(Math.floor(Date.now() / 1000) + 5),
+      date: new Date().toUTCString(),
+    },
+    body: {},
+  });
+
+  it("default (observe): NUNCA dorme, mesmo com remaining baixíssimo na resposta anterior", async () => {
+    const httpClient = new FakeHttpClient();
+    httpClient.enqueue(rateLimitedResponse(0));
+    httpClient.enqueue({ status: 200, body: {} });
+    const sleep = vi.fn(async (_ms: number) => {});
+    const client = makeClient(httpClient, { sleep });
+
+    await client.request("GET /api/connections");
+    await client.request("GET /api/connections");
+
+    expect(sleep).not.toHaveBeenCalled();
+  });
+
+  it("throttle: NÃO dorme antes da 1ª chamada (sem snapshot anterior ainda)", async () => {
+    const httpClient = new FakeHttpClient();
+    httpClient.enqueue(rateLimitedResponse(0));
+    const sleep = vi.fn(async (_ms: number) => {});
+    const client = makeClient(httpClient, { sleep, rateLimit: { mode: "throttle" } });
+
+    await client.request("GET /api/connections");
+
+    expect(sleep).not.toHaveBeenCalled();
+  });
+
+  it("throttle: dorme ANTES da 2ª chamada quando a 1ª deixou remaining <= reserve", async () => {
+    const httpClient = new FakeHttpClient();
+    httpClient.enqueue(rateLimitedResponse(0)); // 1ª resposta: orçamento zerado
+    httpClient.enqueue({ status: 200, body: {} }); // 2ª chamada, depois de esperar
+    const sleep = vi.fn(async (_ms: number) => {});
+    const client = makeClient(httpClient, { sleep, rateLimit: { mode: "throttle", reserve: 0 } });
+
+    await client.request("GET /api/connections");
+    expect(sleep).not.toHaveBeenCalled(); // ainda não sabia do orçamento antes da 1ª
+
+    await client.request("GET /api/connections");
+    expect(sleep).toHaveBeenCalledTimes(1);
+    expect(sleep.mock.calls[0]?.[0]).toBeGreaterThan(0);
+  });
+
+  it("throttle: NÃO dorme quando remaining > reserve", async () => {
+    const httpClient = new FakeHttpClient();
+    httpClient.enqueue(rateLimitedResponse(500));
+    httpClient.enqueue({ status: 200, body: {} });
+    const sleep = vi.fn(async (_ms: number) => {});
+    const client = makeClient(httpClient, { sleep, rateLimit: { mode: "throttle", reserve: 10 } });
+
+    await client.request("GET /api/connections");
+    await client.request("GET /api/connections");
+
+    expect(sleep).not.toHaveBeenCalled();
+  });
+});

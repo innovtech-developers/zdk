@@ -38,6 +38,7 @@ export { UNLIMITED_CONCURRENCY, ConcurrencyLimiter } from "./core/semaphore";
 export type { Semaphore } from "./core/semaphore";
 export type { RetryClass, OperationMetadata } from "./core/operation-metadata";
 export type { RateLimitSnapshot } from "./core/rate-limit";
+export type { RateLimitOptions } from "./core/api-client";
 
 // Tipos derivados do contrato (§5.1) — para quem quiser tipar precisamente
 // além do que os métodos de recurso já devolvem.

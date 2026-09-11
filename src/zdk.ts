@@ -6,7 +6,7 @@
  */
 
 import { resolveConfig, type ZdkConfigInput } from "./core/config";
-import { ApiClient } from "./core/api-client";
+import { ApiClient, type RateLimitOptions } from "./core/api-client";
 import { FetchHttpClient } from "./core/http-client";
 import { Capabilities } from "./core/capabilities";
 import { DEFAULT_RETRY_CONFIG, type RetryConfig } from "./core/retry";
@@ -35,6 +35,8 @@ export interface ZdkOptions extends ZdkConfigInput {
   readonly defaultTimeoutMs?: number;
   /** Pré-checa `capabilities` em toda chamada, antes do HTTP. @default false */
   readonly verifyCapabilities?: boolean;
+  /** Comportamento de rate limit (§5.8.4). @default `{ mode: "observe" }` — nunca dorme sozinho. */
+  readonly rateLimit?: RateLimitOptions;
 }
 
 export interface VerifyResult {
@@ -75,6 +77,7 @@ export class Zdk {
       retryConfig: options.retryConfig ?? DEFAULT_RETRY_CONFIG,
       defaultTimeoutMs: options.defaultTimeoutMs,
       verifyCapabilities: options.verifyCapabilities ?? false,
+      rateLimit: options.rateLimit,
       onRateLimit: (snapshot) => {
         this.lastRateLimit = snapshot;
       },

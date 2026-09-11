@@ -29,6 +29,27 @@ export interface ApiClientOptions {
   readonly verifyCapabilities?: boolean;
   /** Observa o orçamento de rate limit em toda resposta com os headers presentes (sucesso ou falha). */
   readonly onRateLimit?: (snapshot: RateLimitSnapshot) => void;
+  /** Comportamento de rate limit (§5.8.4). @default `{ mode: "observe" }` */
+  readonly rateLimit?: RateLimitOptions;
+  /** @default setTimeout-based sleep — trocável em teste. */
+  readonly sleep?: (ms: number) => Promise<void>;
+}
+
+export interface RateLimitOptions {
+  /**
+   * `"observe"` (default): nunca dorme sozinho — só expõe o snapshot via
+   * `onRateLimit`. Latência escondida em SDK é pior que erro visível.
+   * `"throttle"`: pausa PROATIVAMENTE, antes da próxima chamada, quando o
+   * orçamento observado da chamada anterior já está no ou abaixo de
+   * `reserve` — para job em lote, onde esperar é melhor que tomar `429`.
+   */
+  readonly mode?: "observe" | "throttle";
+  /** Em modo `throttle`: pausa quando `remaining <= reserve`. @default 0 */
+  readonly reserve?: number;
+}
+
+async function defaultSleep(ms: number): Promise<void> {
+  await new Promise<void>((resolve) => setTimeout(resolve, ms));
 }
 
 export interface ApiRequestOptions<K extends OperationKey> {
@@ -75,6 +96,8 @@ async function safeParseJson(response: Response): Promise<unknown> {
 }
 
 export class ApiClient {
+  private lastRateLimitSnapshot: RateLimitSnapshot | null = null;
+
   constructor(private readonly options: ApiClientOptions) {}
 
   /**
@@ -100,6 +123,8 @@ export class ApiClient {
     if (this.options.verifyCapabilities) {
       await this.assertSupported(key);
     }
+
+    await this.maybeThrottle();
 
     const attempt = async (): Promise<Response> => {
       const prepared = buildRequest({
@@ -169,11 +194,36 @@ export class ApiClient {
   }
 
   private emitRateLimit(response: Response): void {
-    if (!this.options.onRateLimit) return;
     const dateHeader = response.headers.get("date");
     const observedAt = dateHeader ? new Date(dateHeader) : new Date();
     const snapshot = parseRateLimitHeaders(response.headers, observedAt);
-    if (snapshot) this.options.onRateLimit(snapshot);
+    if (!snapshot) return;
+
+    // Guardado sempre (mode "throttle" precisa dele mesmo sem onRateLimit
+    // configurado); o hook só dispara se o consumidor de fato o passou.
+    this.lastRateLimitSnapshot = snapshot;
+    this.options.onRateLimit?.(snapshot);
+  }
+
+  /**
+   * Modo `"throttle"` (opt-in, §5.8.4): antes de fazer a PRÓXIMA chamada,
+   * pausa até `resetAt` se o snapshot da chamada anterior já mostrava
+   * `remaining <= reserve`. Nunca dorme sozinho no modo `"observe"` (default).
+   */
+  private async maybeThrottle(): Promise<void> {
+    if ((this.options.rateLimit?.mode ?? "observe") !== "throttle") return;
+
+    const snapshot = this.lastRateLimitSnapshot;
+    if (!snapshot) return;
+
+    const reserve = this.options.rateLimit?.reserve ?? 0;
+    if (snapshot.remaining > reserve) return;
+
+    const waitMs = millisecondsUntilReset(snapshot);
+    if (waitMs <= 0) return;
+
+    const sleep = this.options.sleep ?? defaultSleep;
+    await sleep(waitMs);
   }
 
   private async toError(response: Response, key: OperationKey): Promise<Error> {
