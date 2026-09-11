@@ -23,7 +23,7 @@ orçamento observado da chamada anterior já está no ou abaixo de
 
 #### Defined in
 
-[src/core/api-client.ts:47](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/api-client.ts#L47)
+[src/core/api-client.ts:47](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/api-client.ts#L47)
 
 ___
 
@@ -41,4 +41,4 @@ Em modo `throttle`: pausa quando `remaining <= reserve`.
 
 #### Defined in
 
-[src/core/api-client.ts:49](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/core/api-client.ts#L49)
+[src/core/api-client.ts:49](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/core/api-client.ts#L49)

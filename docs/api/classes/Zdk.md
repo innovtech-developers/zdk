@@ -54,7 +54,7 @@ Síncrono, zero I/O — valida só `baseUrl`/`token` (§5.6). Prova de credencia
 
 #### Defined in
 
-[src/zdk.ts:69](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L69)
+[src/zdk.ts:69](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L69)
 
 ## Properties
 
@@ -64,7 +64,7 @@ Síncrono, zero I/O — valida só `baseUrl`/`token` (§5.6). Prova de credencia
 
 #### Defined in
 
-[src/zdk.ts:55](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L55)
+[src/zdk.ts:55](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L55)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:56](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L56)
+[src/zdk.ts:56](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L56)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:65](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L65)
+[src/zdk.ts:65](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L65)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:60](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L60)
+[src/zdk.ts:60](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L60)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:66](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L66)
+[src/zdk.ts:66](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L66)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:58](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L58)
+[src/zdk.ts:58](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L58)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:63](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L63)
+[src/zdk.ts:63](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L63)
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:57](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L57)
+[src/zdk.ts:57](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L57)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:62](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L62)
+[src/zdk.ts:62](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L62)
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:61](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L61)
+[src/zdk.ts:61](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L61)
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:59](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L59)
+[src/zdk.ts:59](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L59)
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:64](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L64)
+[src/zdk.ts:64](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L64)
 
 ## Accessors
 
@@ -190,7 +190,7 @@ Orçamento de rate limit da última resposta com os headers presentes (§5.8.4).
 
 #### Defined in
 
-[src/zdk.ts:105](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L105)
+[src/zdk.ts:105](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L105)
 
 ## Methods
 
@@ -206,7 +206,7 @@ Gate proativo (§5.2): garante o swagger da instância carregado (1x, cacheado).
 
 #### Defined in
 
-[src/zdk.ts:110](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L110)
+[src/zdk.ts:110](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L110)
 
 ___
 
@@ -228,7 +228,7 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:115](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L115)
+[src/zdk.ts:115](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L115)
 
 ___
 
@@ -259,7 +259,7 @@ host inalcançável.
 
 #### Defined in
 
-[src/zdk.ts:128](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L128)
+[src/zdk.ts:128](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L128)
 
 ___
 
@@ -281,4 +281,4 @@ ___
 
 #### Defined in
 
-[src/zdk.ts:139](https://github.com/innovtech-developers/zdk/blob/32d708594b3d28018e75b42a85a514889f23bb56/src/zdk.ts#L139)
+[src/zdk.ts:139](https://github.com/innovtech-developers/zdk/blob/414d9791c036db3947f156dadff78d717e65face/src/zdk.ts#L139)
