@@ -179,7 +179,7 @@
   - Verify: leitura; referências cruzadas para a spec resolvem
   - Files: `docs/API-QUIRKS.md`, `docs/RESILIENCE.md`, `docs/AUTH.md`
 
-- [ ] **T31 — RECIPES, CHANGELOG, CONTRIBUTING, typedoc**
+- [x] **T31 — RECIPES, CHANGELOG, CONTRIBUTING, typedoc**
   - Acceptance: `RECIPES.md` com envio de texto/mídia (arquivo e URL), template com header via `storage.uploadTemp`, bulk com reprocesso por `results[].status`, **reconciliação após falha ambígua**, janela de 24h por `tickets.info`, paginação, webhooks, dashboard; `CHANGELOG.md` em Keep a Changelog com `1.0.0` e BREAKING CHANGES; `CONTRIBUTING.md` com o fluxo `sync:api` e a política de quirk
   - Verify: `npm run docs:generate` sem warning; exemplos das receitas compilam
   - Files: `docs/RECIPES.md`, `CHANGELOG.md`, `CONTRIBUTING.md`, `docs/api/` (gerado)
