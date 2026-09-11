@@ -44,10 +44,10 @@ const bothInstances = [
 ];
 
 describe("registry API_QUIRKS", () => {
-  it("tem os 23 ids esperados, sem duplicata", () => {
+  it("tem os 24 ids esperados, sem duplicata", () => {
     const ids = API_QUIRKS.map((q) => q.id);
-    expect(ids).toHaveLength(23);
-    expect(new Set(ids).size).toBe(23);
+    expect(ids).toHaveLength(24);
+    expect(new Set(ids).size).toBe(24);
   });
 
   it("toda entrada tem id, at e reason não vazios", () => {
@@ -180,6 +180,32 @@ describe("Q23 — MessageTemplate.type/status ainda com os enums documentados (o
     const status = doc.components.schemas["MessageTemplate"]?.["properties"]?.["status"] as { enum?: readonly string[] } | undefined;
     expect(type?.enum).toEqual(["PHONE", "URL", "QUICK_REPLY", "COPY_CODE"]);
     expect(status?.enum).toEqual(["no-sent", "wait-approval", "approved", "rejected", "blocked"]);
+  });
+});
+
+describe("Q24 — campos com default ainda fora do required[] (o codegen que os marca obrigatórios é comportamento da ferramenta, não do schema)", () => {
+  const cases: readonly [schema: string, property: string][] = [
+    ["ContactPostData", "isGroup"],
+    ["ContactPostData", "blocked"],
+    ["ContactPostData", "noCheckNumber"],
+    ["ContactTagsPostData", "replaceTags"],
+    ["ContactTagsPostData", "createTagIfNotExists"],
+    ["TicketResolveForm", "feedbackOption"],
+    ["WebhookPostData", "active"],
+  ];
+
+  it.each(bothInstances)("%s", (_label, doc) => {
+    for (const [schemaName, property] of cases) {
+      const schema = doc.components.schemas[schemaName];
+      // WebhookPostData não existe na zapplataforma (Webhooks é ausente lá —
+      // Q15, não Q24). Pular aqui não esconde nada: a ausência do schema
+      // inteiro já é coberta pelos testes de divergência (T06/T07).
+      if (!schema) continue;
+
+      const prop = schema.properties?.[property] as { default?: unknown } | undefined;
+      expect(prop).toHaveProperty("default");
+      expect(schema.required ?? []).not.toContain(property);
+    }
   });
 });
 

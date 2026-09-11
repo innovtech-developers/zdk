@@ -14,7 +14,7 @@ import { mapHttpError } from "./error-mapper";
 import { ZdkUnsupportedOperationError } from "./errors";
 import { millisecondsUntilReset, parseRateLimitHeaders, parseRetryAfterMs, type RateLimitSnapshot } from "./rate-limit";
 import type { Capabilities } from "./capabilities";
-import type { ApiBody, ApiContentType, ApiResponse, OperationKey } from "./operation";
+import type { ApiContentType, ApiResponse, OperationKey } from "./operation";
 
 export interface ApiClientOptions {
   readonly baseUrl: string;
@@ -33,9 +33,22 @@ export interface ApiClientOptions {
 
 export interface ApiRequestOptions<K extends OperationKey> {
   readonly pathParams?: Readonly<Record<string, string | number>>;
-  readonly query?: Readonly<Record<string, string | number | boolean | undefined>>;
-  /** Corpo JSON — a maioria das operações. Mutuamente exclusivo com `multipart`/`rawBody`. */
-  readonly json?: ApiBody<K, "application/json" & ApiContentType<K>>;
+  readonly query?: Readonly<
+    Record<string, string | number | boolean | readonly (string | number)[] | undefined>
+  >;
+  /**
+   * Corpo JSON — a maioria das operações. Mutuamente exclusivo com
+   * `multipart`/`rawBody`. Valor é `unknown` (não `ApiBody<K,...>`) de
+   * propósito, pelo mesmo motivo de `multipart` já usar `MultipartBody`
+   * genérico: a segurança de tipo real fica no método do RECURSO (T19+),
+   * que pode passar um `ApiBody<K>` cru OU um tipo corrigido por
+   * `RequiredBy`/`OptionalBy` (Q3/Q24) — o primeiro é sempre mais estrito e
+   * o segundo às vezes mais permissivo que o gerado, e um slot fixo em
+   * `ApiBody<K,...>` não aceitaria o segundo caso. A ELEGIBILIDADE por
+   * content-type continua garantida: `never` quando a operação não aceita
+   * json (ex.: `upload-temp`, só multipart).
+   */
+  readonly json?: "application/json" extends ApiContentType<K> ? unknown : never;
   /** Corpo multipart — upload de mídia. Mutuamente exclusivo com `json`/`rawBody`. */
   readonly multipart?: "multipart/form-data" extends ApiContentType<K> ? MultipartBody : never;
   /** Escape hatch bruto (R5) — bypassa `json`/`multipart` por completo. */

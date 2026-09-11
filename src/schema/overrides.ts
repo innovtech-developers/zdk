@@ -1,6 +1,6 @@
 /**
  * Registry auditável dos defeitos reais do contrato (§5.3 da spec — Q1 a
- * Q23). Cada entrada aponta pro ponto exato do swagger e explica o motivo;
+ * Q24). Cada entrada aponta pro ponto exato do swagger e explica o motivo;
  * `tests/contract/quirks.test.ts` valida os que são estruturalmente
  * verificáveis contra os dois snapshots reais. Se a Zappy corrigir um
  * defeito, o teste falha — o registry não apodrece em silêncio.
@@ -43,6 +43,7 @@ export const API_QUIRKS: readonly ApiQuirk[] = Object.freeze([
   { id: "Q21", at: "components.schemas.Message.properties.{id,subtype,isMedia,myContact}", reason: "resposta real (Q19) contradiz o contrato em 4 campos: `id` é string (ID da mensagem no WhatsApp, contrato diz integer), `subtype` é string \"text\" (contrato diz integer — inverte o que se pensava antes de testar), `isMedia` e `myContact` são boolean (contrato diz string para os dois)" },
   { id: "Q22", at: "paths./api/connections/{id}/templates.get.responses.200.content", reason: "CONFIRMADO com GET real: resposta é `{templates: MessageTemplate[]}` — mesmo padrão de Q18. Divergência Q15-style: zapcontabil ainda declara `MessageTemplate` singular (o bug); zapplataforma já corrigiu para a forma certa. A união (primeiro-vence) herda a forma do zapcontabil, então o override segue necessário mesmo com uma instância já certa" },
   { id: "Q23", at: "components.schemas.MessageTemplate.properties.{type,status}", reason: "observado em produção: `type: \"marketing-catalog\"` fora do enum documentado (PHONE/URL/QUICK_REPLY/COPY_CODE — que parece copiado do enum de botão); `status: \"APPROVED\"` fora do enum documentado e com casing diferente (no-sent/wait-approval/approved/rejected/blocked). Taxonomia real desconhecida além dessa amostra — os dois campos ficam como `string`, sem forçar um enum que já se provou errado" },
+  { id: "Q24", at: "components.schemas.{ContactPostData,ContactTagsPostData,TicketResolveForm,WebhookPostData}.properties.*.default", reason: "o oposto de Q2/Q3: `openapi-typescript` marca como obrigatória toda property com `default` no schema mesmo fora do array `required[]` (defaultNonNullable) — faz sentido para resposta, não para corpo de requisição, onde o servidor aceita omissão e aplica o default sozinho. Afeta isGroup/blocked/noCheckNumber (ContactPostData), replaceTags/createTagIfNotExists (ContactTagsPostData), feedbackOption (TicketResolveForm) e active (WebhookPostData) — `OptionalBy` desfaz isso" },
 ] as const);
 
 /**

@@ -9,7 +9,7 @@
 
 import { Resource } from "./resource";
 import type { ApiBody, ApiParams, ApiResponse } from "../core/operation";
-import type { SendMediaMessageData } from "../schema/types";
+import type { SendMediaMessageData, TicketResolveFormData } from "../schema/types";
 
 /** `{image, video, audio, voice, document}` — direto do path do contrato. */
 type MediaType = ApiParams<"POST /api/tickets/{id}/send/{type}">["path"]["type"];
@@ -56,10 +56,15 @@ export class Tickets extends Resource {
     return this.client.request("POST /api/tickets/{id}/transfer", { pathParams: { id }, json: data });
   }
 
-  /** `feedbackOption: "send-end-message"` dispara mensagem de encerramento ao contato — é por isso que esta operação é `unsafe` em `operation-metadata.ts`. */
+  /**
+   * `feedbackOption: "send-end-message"` dispara mensagem de encerramento ao
+   * contato — é por isso que esta operação é `unsafe` em
+   * `operation-metadata.ts`. Q24: `feedbackOption` fica opcional — tem
+   * `default: "none"`, servidor aplica se omitido.
+   */
   async resolve(
     id: number,
-    data: ApiBody<"POST /api/tickets/{id}/resolve">,
+    data: TicketResolveFormData,
   ): Promise<ApiResponse<"POST /api/tickets/{id}/resolve">> {
     return this.client.request("POST /api/tickets/{id}/resolve", { pathParams: { id }, json: data });
   }

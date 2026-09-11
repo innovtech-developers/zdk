@@ -28,8 +28,15 @@ export interface BuildRequestInput {
   readonly baseUrl: string;
   readonly token: string;
   readonly pathParams?: Readonly<Record<string, string | number>>;
-  /** Chave com valor `undefined` é OMITIDA da query — nunca vira `chave=` vazio nem sobra typo de nome. */
-  readonly query?: Readonly<Record<string, string | number | boolean | undefined>>;
+  /**
+   * Chave com valor `undefined` é OMITIDA da query — nunca vira `chave=`
+   * vazio nem sobra typo de nome. Valor array vira múltiplas entradas
+   * repetidas da mesma chave (`?userIds[]=1&userIds[]=2`) — convenção que os
+   * parâmetros `userIds[]`/`queueIds[]`/`tagIds[]` do dashboard já exigem.
+   */
+  readonly query?: Readonly<
+    Record<string, string | number | boolean | readonly (string | number)[] | undefined>
+  >;
   readonly body?: RequestBody;
   readonly extraHeaders?: Readonly<Record<string, string>>;
 }
@@ -47,7 +54,9 @@ function buildUrl(
   baseUrl: string,
   path: string,
   pathParams: Readonly<Record<string, string | number>> | undefined,
-  query: Readonly<Record<string, string | number | boolean | undefined>> | undefined,
+  query:
+    | Readonly<Record<string, string | number | boolean | readonly (string | number)[] | undefined>>
+    | undefined,
 ): string {
   let resolvedPath = path;
   for (const [key, value] of Object.entries(pathParams ?? {})) {
@@ -66,7 +75,11 @@ function buildUrl(
   const url = new URL(baseUrl + resolvedPath);
   for (const [key, value] of Object.entries(query ?? {})) {
     if (value === undefined) continue;
-    url.searchParams.set(key, String(value));
+    if (Array.isArray(value)) {
+      for (const item of value) url.searchParams.append(key, String(item));
+    } else {
+      url.searchParams.set(key, String(value));
+    }
   }
   return url.toString();
 }

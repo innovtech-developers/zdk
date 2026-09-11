@@ -95,6 +95,51 @@ describe("buildRequest — query (regressão do bug dateToo, v0.7 src/lib/messag
   });
 });
 
+describe("buildRequest — query com array (userIds[]/queueIds[]/tagIds[] do dashboard, T25)", () => {
+  it("valor array vira múltiplas entradas repetidas da mesma chave", () => {
+    const req = buildRequest({
+      ...BASE,
+      method: "GET",
+      path: "/api/dashboard/tickets-por-atendente",
+      query: { startDate: "2026-01-01", endDate: "2026-01-31", "userIds[]": [1, 2, 3] },
+    });
+    const url = new URL(req.url);
+    expect(url.searchParams.getAll("userIds[]")).toEqual(["1", "2", "3"]);
+  });
+
+  it("array vazio não gera entrada nenhuma", () => {
+    const req = buildRequest({
+      ...BASE,
+      method: "GET",
+      path: "/api/dashboard/tickets-por-atendente",
+      query: { startDate: "2026-01-01", endDate: "2026-01-31", "userIds[]": [] },
+    });
+    expect(req.url).not.toContain("userIds");
+  });
+
+  it("array undefined (não informado) é omitido, igual a um escalar undefined", () => {
+    const req = buildRequest({
+      ...BASE,
+      method: "GET",
+      path: "/api/dashboard/tickets-por-atendente",
+      query: { startDate: "2026-01-01", endDate: "2026-01-31", "userIds[]": undefined },
+    });
+    expect(req.url).not.toContain("userIds");
+  });
+
+  it("múltiplos arrays na mesma query, cada um com sua própria chave", () => {
+    const req = buildRequest({
+      ...BASE,
+      method: "GET",
+      path: "/api/dashboard/tickets-agrupados",
+      query: { dimensao: "tag", startDate: "x", endDate: "y", "queueIds[]": [10, 20], "tagIds[]": [5] },
+    });
+    const url = new URL(req.url);
+    expect(url.searchParams.getAll("queueIds[]")).toEqual(["10", "20"]);
+    expect(url.searchParams.getAll("tagIds[]")).toEqual(["5"]);
+  });
+});
+
 describe("buildRequest — headers", () => {
   it("sempre inclui Authorization: Bearer <token>", () => {
     const req = buildRequest({ ...BASE, method: "GET", path: "/api/connections" });

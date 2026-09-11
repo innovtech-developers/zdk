@@ -17,6 +17,17 @@ import { CONNECTION_STATUS, type ConnectionStatus } from "./overrides";
 export type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 
 /**
+ * Q24 — o oposto de Q2/Q3: `openapi-typescript` marca como OBRIGATÓRIA (sem
+ * `?`) toda property que tem `default` no schema, mesmo estando fora do
+ * array `required[]` (comportamento `defaultNonNullable` da ferramenta).
+ * Faz sentido para RESPOSTA (servidor sempre preenche o default), não faz
+ * sentido para BODY DE REQUISIÇÃO (cliente pode omitir e deixar o servidor
+ * aplicar o default sozinho) — mas o codegen não distingue os dois casos.
+ * `OptionalBy` desfaz isso nos bodies onde acontece.
+ */
+export type OptionalBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+/**
  * Campo `format: binary` do swagger vira `string` no codegen — mas quem
  * chama tem bytes em memória (`Blob`/`Uint8Array`), não uma string pronta.
  * Achado escrevendo `storage.uploadTemp()` (T24): `UploadTempData` sem isso
@@ -123,6 +134,36 @@ type RawSendMediaMessage = components["schemas"]["SendMediaMessage"];
 
 /** `media` (`format: binary`) vira `string` puro no codegen — `Blob`/`Uint8Array` de verdade também são aceitos. */
 export type SendMediaMessageData = BinaryField<RawSendMediaMessage, "media">;
+
+type RawContactPostData = components["schemas"]["ContactPostData"];
+
+/**
+ * Q3: `name`/`number` têm `required: true` inline — ignorado pelo codegen.
+ * Q24: `isGroup`/`blocked`/`noCheckNumber` têm `default: false` — o codegen
+ * os marca obrigatórios (defaultNonNullable), mas o servidor aceita omissão.
+ */
+export type ContactPostData = RequiredBy<
+  OptionalBy<RawContactPostData, "isGroup" | "blocked" | "noCheckNumber">,
+  "name" | "number"
+>;
+
+type RawContactTagsPostData = components["schemas"]["ContactTagsPostData"];
+
+/** Q24: `replaceTags`/`createTagIfNotExists` têm `default` — servidor aceita omissão. */
+export type ContactTagsPostData = OptionalBy<
+  RawContactTagsPostData,
+  "replaceTags" | "createTagIfNotExists"
+>;
+
+type RawTicketResolveForm = components["schemas"]["TicketResolveForm"];
+
+/** Q24: `feedbackOption` tem `default: "none"` — servidor aceita omissão. */
+export type TicketResolveFormData = OptionalBy<RawTicketResolveForm, "feedbackOption">;
+
+type RawWebhookPostData = components["schemas"]["WebhookPostData"];
+
+/** Q24: `active` tem `default: true` — servidor aceita omissão. */
+export type WebhookPostData = OptionalBy<RawWebhookPostData, "active">;
 
 export { CONNECTION_STATUS };
 export type { ConnectionStatus };
