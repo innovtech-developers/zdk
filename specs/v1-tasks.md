@@ -174,7 +174,7 @@
   - Verify: leitura; todo exemplo de código copiado para um arquivo temporário compila
   - Files: `README.md`, `docs/MIGRATION.md`
 
-- [ ] **T30 — API-QUIRKS, RESILIENCE, AUTH**
+- [x] **T30 — API-QUIRKS, RESILIENCE, AUTH**
   - Acceptance: `API-QUIRKS.md` com os 22 desvios e o que muda quando a Zappy corrigir; `RESILIENCE.md` com timeout, backoff, **a matriz de §5.8.3 na íntegra**, rate limit e a justificativa de não haver breaker; `AUTH.md` com allowlist, token, `new Zdk` vs `connect` vs `verify`
   - Verify: leitura; referências cruzadas para a spec resolvem
   - Files: `docs/API-QUIRKS.md`, `docs/RESILIENCE.md`, `docs/AUTH.md`
