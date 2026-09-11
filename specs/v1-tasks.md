@@ -150,12 +150,12 @@
 
 ## F7 — Fachada
 
-- [ ] **T26 — `Zdk`, `verify()` e `Zdk.connect()`**
+- [x] **T26 — `Zdk`, `verify()` e `Zdk.connect()`**
   - Acceptance: fachada compondo os 12 recursos como `readonly`; `verify()` devolvendo `{connections, rateLimit}` e reusando `connections.list()`; `Zdk.connect()` = `new Zdk()` + `verify()`; `zdk.rateLimit` refletindo a última resposta; `401` → `ZdkAuthError` com `code` distinguindo as duas causas; `2xx` sem `connections` → `ZdkConfigError`
   - Verify: `npx vitest run tests/integration/verify.test.ts` — `new Zdk()` faz **zero** requisições, `Zdk.connect()` **exatamente uma**, provado por contador
   - Files: `src/zdk.ts`, `tests/integration/verify.test.ts`
 
-- [ ] **T27 — Barrel público, remoção do código v0.7 e de `axios`/`form-data` (2º marco)**
+- [x] **T27 — Barrel público, remoção do código v0.7 e de `axios`/`form-data` (2º marco)**
   - Acceptance: `src/index.ts` exportando só a superfície pretendida; apagados `src/lib/*` (7 arquivos), `src/zappy-api.ts`, `src/types.ts`; isenção de ESLint de T03 removida; **`axios`/`form-data` saem de `dependencies`** — herdado de T18, que não podia fazer isso ainda porque os arquivos legados que os usam só morrem aqui
   - Verify: `npm run verify`; `grep -rn "IError\|makeRequest" src/` vazio; `grep -rn "axios\|form-data" src/` vazio; `npm run lint` passa **sem** a isenção
   - Files: `src/index.ts`, `.eslintrc.json`, `package.json`, + remoções
