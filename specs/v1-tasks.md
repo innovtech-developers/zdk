@@ -186,7 +186,7 @@
 
 ## F10 — Release
 
-- [ ] **T32 — Smoke test de empacotamento**
+- [x] **T32 — Smoke test de empacotamento**
   - Acceptance: `npm pack` gera tarball; num diretório temporário, `require("zdk")` e `import "zdk"` funcionam com tipos resolvidos; `files` do `package.json` não vaza `tests/` nem `specs/`
   - Verify: script de smoke rodando os dois imports e um `tsc --noEmit` contra o pacote instalado
   - Files: `package.json`, `scripts/smoke-pack.sh`
