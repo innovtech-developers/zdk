@@ -9,7 +9,7 @@ import { resolveConfig, type ZdkConfigInput } from "./core/config";
 import { ApiClient, type RateLimitOptions } from "./core/api-client";
 import { FetchHttpClient } from "./core/http-client";
 import { Capabilities } from "./core/capabilities";
-import { DEFAULT_RETRY_CONFIG, type RetryConfig } from "./core/retry";
+import type { RetryConfig } from "./core/retry";
 import { UNLIMITED_CONCURRENCY, type Semaphore } from "./core/semaphore";
 import type { RateLimitSnapshot } from "./core/rate-limit";
 import { ZdkConfigError } from "./core/errors";
@@ -30,13 +30,16 @@ import { Metrics } from "./resources/metrics";
 
 export interface ZdkOptions extends ZdkConfigInput {
   readonly semaphore?: Semaphore;
-  readonly retryConfig?: RetryConfig;
+  /** Parcial: mesclado por cima de DEFAULT_RETRY_CONFIG (não precisa especificar todos os campos). */
+  readonly retryConfig?: Partial<RetryConfig>;
   /** Timeout global de fallback — só vale para operação sem motivo técnico próprio (§5.8.1). @default 10_000 */
   readonly defaultTimeoutMs?: number;
   /** Pré-checa `capabilities` em toda chamada, antes do HTTP. @default false */
   readonly verifyCapabilities?: boolean;
   /** Comportamento de rate limit (§5.8.4). @default `{ mode: "observe" }` — nunca dorme sozinho. */
   readonly rateLimit?: RateLimitOptions;
+  /** Observa o orçamento de rate limit em toda resposta com os headers presentes — além de `zdk.rateLimit`, que é sempre atualizado. */
+  readonly onRateLimit?: (snapshot: RateLimitSnapshot) => void;
 }
 
 export interface VerifyResult {
@@ -74,12 +77,13 @@ export class Zdk {
       httpClient,
       capabilities: this.capabilityRegistry,
       semaphore: options.semaphore ?? UNLIMITED_CONCURRENCY,
-      retryConfig: options.retryConfig ?? DEFAULT_RETRY_CONFIG,
+      retryConfig: options.retryConfig,
       defaultTimeoutMs: options.defaultTimeoutMs,
       verifyCapabilities: options.verifyCapabilities ?? false,
       rateLimit: options.rateLimit,
       onRateLimit: (snapshot) => {
         this.lastRateLimit = snapshot;
+        options.onRateLimit?.(snapshot);
       },
     });
 

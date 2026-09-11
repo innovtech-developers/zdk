@@ -22,7 +22,8 @@ export interface ApiClientOptions {
   readonly httpClient: HttpClient;
   readonly capabilities: Capabilities;
   readonly semaphore?: Semaphore;
-  readonly retryConfig?: RetryConfig;
+  /** Parcial: mesclado por cima de DEFAULT_RETRY_CONFIG (não precisa especificar todos os campos). */
+  readonly retryConfig?: Partial<RetryConfig>;
   /** Timeout global de fallback — só vale para operação sem motivo técnico próprio (§5.8.1). @default 10_000 */
   readonly defaultTimeoutMs?: number;
   /** Pré-checa `capabilities` em TODA chamada, antes do HTTP. @default false — custo de rede só quando pedido. */

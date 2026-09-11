@@ -162,3 +162,59 @@ describe("Zdk — capabilities()/supports() delegam para o registry interno", ()
     expect(zdk.supports("GET /api/webhooks")).toBe(false);
   });
 });
+
+describe("Zdk — onRateLimit do consumidor compõe com o interno (zdk.rateLimit)", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("onRateLimit do consumidor É chamado, e zdk.rateLimit AINDA reflete a resposta", async () => {
+    const onRateLimit = vi.fn();
+    const zdk = new Zdk({ baseUrl: BASE_URL, token: TOKEN, onRateLimit });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        jsonResponse(
+          { connections: [] },
+          {
+            headers: {
+              "x-ratelimit-limit": "10000",
+              "x-ratelimit-remaining": "9999",
+              "x-ratelimit-reset": "1789060936",
+              date: "Thu, 10 Sep 2026 17:22:14 GMT",
+            },
+          },
+        ),
+      ),
+    );
+
+    await zdk.verify();
+
+    expect(onRateLimit).toHaveBeenCalledTimes(1);
+    expect(zdk.rateLimit).toMatchObject({ limit: 10000, remaining: 9999 });
+  });
+});
+
+describe("Zdk — retryConfig parcial (não precisa especificar todos os campos)", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("passar só deadlineMs não quebra o resto do retry (attempts/baseDelayMs seguem o default)", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(jsonResponse({ error: "ERR_INTERNAL" }, { status: 500 }))
+      .mockResolvedValueOnce(jsonResponse({ connections: [] }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const zdk = new Zdk({
+      baseUrl: BASE_URL,
+      token: TOKEN,
+      retryConfig: { deadlineMs: null, sleep: async () => {} },
+    });
+    const result = await zdk.verify();
+
+    expect(fetchMock).toHaveBeenCalledTimes(2); // 500 (safe, repete) -> sucesso
+    expect(result.connections).toEqual([]);
+  });
+});
