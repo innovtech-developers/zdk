@@ -6,6 +6,7 @@
  */
 
 import type { components } from "../generated/openapi";
+import type { ApiResponse } from "../core/operation";
 import { CONNECTION_STATUS, type ConnectionStatus } from "./overrides";
 
 /**
@@ -164,6 +165,20 @@ type RawWebhookPostData = components["schemas"]["WebhookPostData"];
 
 /** Q24: `active` tem `default: true` — servidor aceita omissão. */
 export type WebhookPostData = OptionalBy<RawWebhookPostData, "active">;
+
+/**
+ * Tipos "bare" — sem nenhum quirk conhecido que exija correção, então
+ * derivados direto da resposta de `get()` (que sempre traz o objeto
+ * completo, ao contrário de `list()`, cujo item de array pode ser mais
+ * enxuto em alguns contratos). Sem prefixo `I`, ao contrário da v0.7
+ * (`ITicket` → `Ticket`) — ver docs/MIGRATION.md.
+ */
+export type Ticket = ApiResponse<"GET /api/tickets/{id}">;
+export type Contact = ApiResponse<"GET /api/contacts/{id}">;
+export type Tag = ApiResponse<"GET /api/tags/{id}">;
+export type Queue = ApiResponse<"GET /api/queues/{id}">;
+export type User = ApiResponse<"GET /api/users/{id}">;
+export type Webhook = ApiResponse<"GET /api/webhooks/{id}">;
 
 export { CONNECTION_STATUS };
 export type { ConnectionStatus };

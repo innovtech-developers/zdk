@@ -60,6 +60,12 @@ export type {
   ContactTagsPostData,
   TicketResolveFormData,
   WebhookPostData,
+  Ticket,
+  Contact,
+  Tag,
+  Queue,
+  User,
+  Webhook,
 } from "./schema/types";
 
 // Registry de defeitos do contrato (§5.3) — auditável, não escondido.
