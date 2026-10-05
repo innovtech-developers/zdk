@@ -2,6 +2,12 @@
 
 Este projeto segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.0.1]
+
+### Changed
+
+- **Retry agora é opt-in:** o padrão passou de `attempts: 3` para `attempts: 1` (sem retry). Para habilitar, use `retryConfig: { attempts: 3 }` no cliente ou por chamada.
+
 ## [1.0.0]
 
 Reescrita completa, derivada do contrato OpenAPI real da Zappy (`/swagger.json`) em vez de escrita à mão. **Break limpo — sem shims da v0.7.**

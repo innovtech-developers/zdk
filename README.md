@@ -133,10 +133,10 @@ try {
 
 ### O cálculo que importa antes de configurar timeout curto
 
-> **Pior caso de wall clock de uma chamada, com os defaults:**
+> **Retry é opt-in** (`attempts: 1` por padrão). Ao habilitar com `retryConfig: { attempts: 3 }`, o pior caso de wall clock de uma chamada é:
 > `timeoutMs × attempts + Σ(backoff) ≈ 10s × 3 + (~0,25s + ~2s) ≈ 32s`
 >
-> Um handler serverless de 30s que hoje falha em 10s passaria a falhar (com um erro melhor explicado) perto dos 30s. `retryConfig.deadlineMs` limita o total; ver [docs/RESILIENCE.md](./docs/RESILIENCE.md#deadline).
+> Um handler serverless de 30s pode estourar com retry habilitado. `retryConfig.deadlineMs` limita o total; ver [docs/RESILIENCE.md](./docs/RESILIENCE.md#deadline).
 
 ## `supports()` — a API não é a mesma em toda instância
 

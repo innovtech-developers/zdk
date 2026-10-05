@@ -47,11 +47,13 @@ Segurança de retry não se decide pelo método HTTP — decide-se por **o que j
 
 `retryOnTimeout` é `false` por default **mesmo pra `safe`** — timeout é ambíguo por natureza (a resposta pode ter sido processada no servidor e só não chegou a tempo).
 
+**Retry é opt-in:** o padrão é `attempts: 1` (sem retry). Para habilitar, defina `attempts` maior que 1 (client-wide ou por request):
+
 ```ts
 const zdk = new Zdk({
   baseUrl, token,
   retryConfig: {
-    attempts: 3,
+    attempts: 3, // default: 1 (sem retry)
     baseDelayMs: 250,
     maxDelayMs: 8_000,
     maxRetryAfterMs: 30_000,
@@ -67,7 +69,7 @@ const zdk = new Zdk({
 
 Backoff é exponencial com **full jitter** (`delay = random(0, min(maxDelayMs, baseDelayMs · 2^tentativa))`) — jitter fixo ou "equal" sincronizaria as retentativas de vários workers do mesmo tenant, produzindo exatamente o pico de carga que o backoff existe pra evitar.
 
-`error.attempts`/`error.retryable` (em todo `ZdkError`) descrevem o resultado do processo, não "sobrou orçamento": um `ECONNRESET` numa operação `safe` que esgota as 3 tentativas ainda é `retryable: true` (nunca deixou de ser o tipo que se repete, só ficou sem orçamento); um `404` é `retryable: false` já na 1ª.
+`error.attempts`/`error.retryable` (em todo `ZdkError`) descrevem o resultado do processo, não "sobrou orçamento": um `ECONNRESET` numa operação `safe` que esgota as tentativas configuradas (ex.: 3) ainda é `retryable: true` (nunca deixou de ser o tipo que se repete, só ficou sem orçamento); um `404` é `retryable: false` já na 1ª.
 
 ### Quando o retry é proibido (`unsafe`)
 
@@ -75,9 +77,9 @@ Sem `Idempotency-Key` (Q11), a lib não pode adivinhar se uma falha ambígua che
 
 ### O pior caso de wall clock
 
-> `timeoutMs × attempts + Σ(backoff)` — com os defaults, `10s × 3 + (~0,25s + ~2s) ≈ 32s`.
+> `timeoutMs × attempts + Σ(backoff)` — com o default (`attempts: 1`) é só o `timeoutMs`. Ao habilitar retry com `attempts: 3`: `10s × 3 + (~0,25s + ~2s) ≈ 32s`.
 
-Isso quebra handler serverless de 30s que hoje falha em 10s (sem retry nenhum, porque a v0.7 nunca teve). `retryConfig.deadlineMs` limita o total:
+Com retry habilitado, isso pode quebrar handler serverless de 30s. `retryConfig.deadlineMs` limita o total:
 
 ```ts
 retryConfig: { deadlineMs: 8_000 } // desiste sem dormir se o próximo delay estouraria o teto

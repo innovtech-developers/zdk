@@ -18,6 +18,7 @@ import {
 import type { RetryClass } from "./operation-metadata";
 
 export interface RetryConfig {
+  /** Total de tentativas (1 inicial + retries). `1` = sem retry (padrão); use `3` etc. para habilitar. */
   readonly attempts: number;
   readonly baseDelayMs: number;
   readonly maxDelayMs: number;
@@ -41,7 +42,7 @@ export interface RetryConfig {
 }
 
 export const DEFAULT_RETRY_CONFIG: RetryConfig = Object.freeze({
-  attempts: 3,
+  attempts: 1,
   baseDelayMs: 250,
   maxDelayMs: 8_000,
   maxRetryAfterMs: 30_000,
