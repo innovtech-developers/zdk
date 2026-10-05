@@ -116,8 +116,20 @@ describe("executeWithRetry", () => {
   const zeroRandom = () => 0;
 
   function config(overrides: Partial<typeof DEFAULT_RETRY_CONFIG> = {}) {
-    return { ...DEFAULT_RETRY_CONFIG, sleep: noSleep, random: zeroRandom, ...overrides };
+    return { ...DEFAULT_RETRY_CONFIG, attempts: 3, sleep: noSleep, random: zeroRandom, ...overrides };
   }
+
+  it("default é sem retry: attempts=1, falha retryable não repete", async () => {
+    expect(DEFAULT_RETRY_CONFIG.attempts).toBe(1);
+    const fn = vi.fn().mockRejectedValue(ambiguousNetwork());
+    try {
+      await executeWithRetry(fn, { operation: "GET /x", retryClass: "safe" }, config({ attempts: 1 }));
+      expect.unreachable();
+    } catch (error) {
+      expect(fn).toHaveBeenCalledTimes(1);
+      expect((error as ZdkNetworkError).attempts).toBe(1);
+    }
+  });
 
   it("sucesso de primeira: fn chamada uma vez, sem sleep", async () => {
     noSleep.mockClear();
